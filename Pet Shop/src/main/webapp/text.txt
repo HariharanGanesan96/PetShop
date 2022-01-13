@@ -1,0 +1,5 @@
+<% 	
+				//	Quantity:<input type="number" 
+					//	max="<%=cartItems.getPet().getAvilableQty()%>"  min="0" style="width: 50px; height: 25px;" id="quantity" name="quantity">
+				</p>
+				%>

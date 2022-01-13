@@ -1,0 +1,92 @@
+@charset "ISO-8859-1";
+ *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        #background{
+            background: linear-gradient(#e66465, #9198e5);
+            height: 100vh;
+            background-color: rgb(207, 202, 193);
+        }
+        .registerform{ 
+            width: 800px;
+            height: 520px;
+            position: absolute;
+            border-radius: 10px;
+            left: 21%;
+            top: 8%;
+            color: rgb(223, 220, 219);
+            background-color: rgb(43, 42, 42);
+        
+        }
+        h1{
+        color: white;
+        margin-top: 10px;}
+        #registername{
+            font-size: 25px;
+        }
+        table{
+            padding-top: 20px;
+            font-size: 20px;
+            font-weight: normal;
+            padding-left: 20px;  
+            position: absolute;
+            left: 50%;
+            background: linear-gradient(rgba(0,0,0,.5)50%);
+        }
+        table img{
+            width: 400px;
+            height: 520px;
+        }
+        table tr,td{
+            padding-right: 10px;
+            padding-top: 20px;
+            padding-left: 5px;
+        }
+        table button{
+            height: 30px;
+            width: 120px;
+            border: none;
+            font-weight: bolder;
+            font-size: 15px;
+            background-color: rgb(0, 138, 252);
+            color: white;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+        table input{
+            height: 25px;
+            width: 200px;
+            border-left: none;
+            border-top: none;
+            border-right: none;
+            padding-left: 10px;          
+            background-color: transparent;
+            font-size: 15px; 
+            color: white;
+        }
+        table input:focus{
+        outline: none;
+        background-color: transparent;
+        }
+        table button:hover{
+        background-color: white;
+        color: black;
+        }
+        table span{
+            color: red;
+        }
+        #repasswordcomment{
+            display: none;
+        }
+        #image img{
+            position: absolute;
+            height: 520px;
+            width: 400px;     
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;      
+        }
+        form div {
+            display: inline;
+        }

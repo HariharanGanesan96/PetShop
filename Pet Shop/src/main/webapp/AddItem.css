@@ -1,0 +1,87 @@
+@charset "ISO-8859-1";
+ *{
+            margin: 0;
+            padding: 0;
+            color:white;
+        }
+        
+     #background{
+            background:linear-gradient(rgba(0,0,0,.5)50%,rgba(0,0,0,.5)50%) ,url("https://wallpaperaccess.com/full/472042.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+        .animalform {
+            position: absolute;
+            left: 20%;
+            top: 19%;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 22px;             
+        }
+        table{
+            margin-top: -30px;
+            border-radius: 5px;
+            padding-left: 20px;
+            background-color: rgba(194, 204, 198, 0.959);
+            width: 850px;
+            height: 450px;
+        }
+        table th,td {
+            padding-left: 10px;
+            line-height:2;
+            margin-top: 10px;
+            color:black;
+        }
+        table input:focus{
+        outline: none;
+        }
+        table label{
+          color:black;
+          }
+        table input{
+            width: 200px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            color:black;
+            padding-left: 10px;
+        }
+        table select{
+            width: 210px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            color: black;
+            padding-left: 10px;
+        }
+         table select option{
+            
+            color: black;
+            padding-left: 10px;
+        }
+        table button{
+            width: 130px;
+            height: 30px;
+            color: white;
+            background-color: rgb(61, 160, 36);
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+         table button:hover{      
+            color: black;
+            background-color: white;
+        }
+        
+       
+        textarea{
+            width: 200px;
+            height: 50px;
+            border-radius: 5px;
+            border: none;
+            resize: none;
+            padding-left: 20px;
+            padding-top: 20px;
+        }
+       

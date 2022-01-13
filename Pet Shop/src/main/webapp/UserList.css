@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+body{
+   background-image:linear-gradient(rgba(0,0,0,.1)50%,rgb(0,0,0,.1)50%), url("https://images.pexels.com/photos/7282845/pexels-photo-7282845.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+   color:white;
+}
+.head{
+    height: 40px;
+    width: 100%;
+    padding-top: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;  
+  
+}
+
+h1{
+    display: inline;
+    width: 300px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: x-large;
+}
+#menu {
+    height: 40px;
+    display: inline;
+}
+#menu li{
+    display: inline;
+}
+#menu a{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    float: right;
+    padding-right: 20px;
+    margin-top: 2px;
+    transition: 0.5s;
+}
+#menu a:hover{
+    color: tomato;
+}
