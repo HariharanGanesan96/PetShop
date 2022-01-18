@@ -21,11 +21,15 @@
 }
 
 body {
-	background-image: linear-gradient(rgba(0, 0, 0, .5) 50%,
-		rgb(0, 0, 0, .5) 50%), url("./Images/mypetbackground.jpg");
-	background-repeat: no-repeat;
+	background-image: linear-gradient(rgba(0, 0, 0, .4) 50%,
+		rgb(0, 0, 0, .4) 50%), url("./Images/background6.jpg");
+    background-repeat: no-repeat;
+	background-position:center;
 	background-size: cover;
 	background-attachment: fixed;
+	text-transform: capitalize;
+	font-weight:bold;
+	color: white;
 }
 
 .navigation {
@@ -135,8 +139,8 @@ h2:hover {
 }
 
 #pets img {
-	width: 340px;
-	height: 290px;
+	width: 320px;
+	height: 250px;
 	border-radius: 10px;
 }
 
@@ -213,7 +217,6 @@ h2:hover {
 									<td><img src="./Pets/<%=petDetails.getPetImage()%>"
 										alt="petimage"></td>
 									<td class="petdetails">
-										<p>Type</p>
 										<p>Name</p>
 										<p>Color</p>
 										<p>price</p>
@@ -232,10 +235,6 @@ h2:hover {
 									</td>
 
 									<td class="petdetails">
-										<p>
-											:
-											<%=petDetails.getPetType()%>
-										</p>
 										<p>
 											:
 											<%=petDetails.getPetName()%>

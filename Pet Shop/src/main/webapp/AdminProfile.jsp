@@ -8,10 +8,94 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin profile</title>
-  <link rel="stylesheet" href="AdminProfile.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/aeca6704b2.js" crossorigin="anonymous"></script>
-    <style type="text/css">
+  <script src="https://kit.fontawesome.com/aeca6704b2.js" crossorigin="anonymous"></script>
+  <style type="text/css">
+   
+   
+   body{
+   background-image:linear-gradient(rgba(0,0,0,.5)50%,rgb(0,0,0,.5)50%), url("./Images/background1.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   height:100vh;
+   text-transform: capitalize;
+   color:white;
+   
+}
+.head{
+    height: 40px;
+    width: 100%;
+    padding-top: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;   
+}
+
+h1{
+    display: inline;
+    width: 300px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: x-large;
+}
+#menu {
+    height: 40px;
+    display: inline;
+}
+#menu li{
+    display: inline;
+}
+#menu a{
+    color: white;
+    font-size:22px;
+    font-weight: bold;
+    text-decoration: none;
+    float: right;
+    padding-right: 20px;
+    margin-top: -10px;
+    transition: 0.5s;
+}
+#menu a:hover{
+    color: tomato;
+}
+h1{
+    display: inline;
+    width: 300px;
+    position: absolute;
+    font-size: x-large;
+    margin-top: 5px;
+}
+input:focus{
+    outline: none;
+}
+
+#menu {
+    display: inline;
+}
+#menu li{
+    display: inline;
+}
+#menu a{
+    text-decoration: none;
+    float: right;
+    padding-right: 20px;
+    margin-top: 10px;
+}
+table{
+margin: 40px;
+font-size: 20px;
+font-weight: bold;}
+
+table img{
+    width: 300px;
+    height: 350px;
+    border: 1px solid;
+    border-color:black;
+}
+table tr,td{
+    padding-left: 25px;
+    padding-top: 20px;
+}
     #logout {
 	width: 130px;
 	height: 30px;
@@ -43,24 +127,24 @@
         <tbody>
             <tr>
                <td rowspan="5"><img src="https://media1.popsugar-assets.com/files/thumbor/gMCOEkYB_3qTEDUrUbxtJkuusAA/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2017/07/12/947/n/1922153/c6f2e6f1596698606ad0d6.04019961_edit_img_image_15110365_1499895175/i/Chris-Hemsworth-Grooming-Interview.jpg" alt=""></td>
-               <td><label for="firstname">FirstName</label></td>
-               <td><input type="text" name="firstname" value="<%=adminDetails.getFirstName()%>"></td>
+               <td>FirstName</td>
+               <td> : <%=adminDetails.getFirstName()%></td>
            </tr>
            <tr>   
-               <td><label for="lastname">LastName</label></td>
-               <td><input type="text" name="lastname" value="<%=adminDetails.getLastName()%>"></td>
+               <td>LastName</td>
+               <td> : <%=adminDetails.getLastName()%></td>
            </tr>
             <tr>
-                <td><label for="username"UserName>UserName</label></td>
-                <td><input type="text" name="username" value="<%=adminDetails.getUserName()%>"></td>
+                <td>UserName</td>
+                <td> : <%=adminDetails.getUserName()%></td>
             </tr>
               <tr>
-                <td><label for="email">Email</label></td>
-                <td><input type="text" name="email" value="<%=adminDetails.getEmail()%>"></td>
+                <td>Email</td>
+                <td> : <%=adminDetails.getEmail()%></td>
               </tr>
               <tr>
-                <td><label for="number">number</label></td>
-                <td><input type="text" name="number" value="<%=adminDetails.getNumber()%>"></td>
+                <td>Number</td>
+                <td> : <%=adminDetails.getNumber()%></td>
               </tr>     
               <tr>
 			<td><a href="Logout.jsp"><button type="button" id="logout">Logout</button></a></td>

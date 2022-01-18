@@ -30,7 +30,7 @@ public class login extends HttpServlet{
 		Customers customerValidation=new Customers(userName,passwowrd);
 		CustomerDAO customerDao=new CustomerDAO();
 		
-		String firstName=customerDao.cusValidation(customerValidation);
+		String firstName=customerDao.customerLoginValidation(customerValidation);
 
 		HttpSession session=req.getSession();
 		session.setAttribute("message", " ");
@@ -49,7 +49,7 @@ public class login extends HttpServlet{
 				resp.sendRedirect("home.jsp");
 			}
 			else {
-				System.out.println("welcome Admin: " + userName);
+				//System.out.println("welcome Admin: " + userName);
 				Admin admin;
 				AdminDAO adminDao=new AdminDAO();
 

@@ -7,7 +7,8 @@
 <%@page import="com.petshop.model.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<% 
+<%
+ 
    double totalPrice=(Double)session.getAttribute("totalCartAmount");
  
    List<CartItems> cartList=(List<CartItems>)session.getAttribute("cartList");
@@ -27,19 +28,19 @@
    boolean flage=true;
    if(customerDetails.getWallet()>=totalPrice){
 	   for(CartItems cartItems: cartList){
-		   PetDetails petDetails=petDao.showPet(cartItems.getPet().getPetId());
+		   PetDetails petDetails=petDao.showCurrentPet(cartItems.getPet().getPetId());
 		   if(petDetails.getAvilableQty()<cartItems.getQuantity()){
-			   flage=false;
-			   write.print("Quantity not Avialble item Id "+cartItems.getItemId());
+	   flage=false;
+	   write.print("Quantity not Avialble item Id "+cartItems.getItemId());
 		   }
 	   }  
 	   
    if(flage){
    orders.getCustomer().setCustomerId(customerDetails.getCustomerId());
    orders.setTotalprice(totalPrice);
-   ordersDao.insert(orders);
+   ordersDao.insertOrder(orders);
 
-   int orderId=ordersDao.orderId();
+   int orderId=ordersDao.getCurrentOrderId();
    
    for(CartItems cartItems: cartList){
    
@@ -49,25 +50,25 @@
    orderItems.setUnitPrice(cartItems.getUnitPrice());
    orderItems.setTotalPrice(cartItems.getTotalPrice());
 
-   orderItemsDao.insert(orderItems);
+   orderItemsDao.insertOrderItems(orderItems);
    
-   PetDetails petDetails=petDao.showPet(cartItems.getPet().getPetId());
+   PetDetails petDetails=petDao.showCurrentPet(cartItems.getPet().getPetId());
    
    //update pet available quantity
    petDetails.setAvilableQty((petDetails.getAvilableQty()-cartItems.getQuantity()));
-   petDao.updatePetAviQty(petDetails);
+   petDao.updatePetAvailableQuantity(petDetails);
      
    //update seller wallet
    Customers petCustomerDetails=customerDao.customerDetails(petDetails.getCustomer().getCustomerId());
    petCustomerDetails.setWallet(petCustomerDetails.getWallet()+(cartItems.getTotalPrice()));
-   customerDao.updateWallet(petCustomerDetails);
+   customerDao.updateCustomerWallet(petCustomerDetails);
    
-   cartItemsDao.delete(cartItems.getItemId());
+   cartItemsDao.deleteCartItem(cartItems.getItemId());
    
    } 
    //update buyer wallet
    customerDetails.setWallet(customerDetails.getWallet()-totalPrice);
-   customerDao.updateWallet(customerDetails);
+   customerDao.updateCustomerWallet(customerDetails);
    
    write.print("order placed successfully \n deducted amount : "
                 +totalPrice+"/n Wallet Amount : "+customerDetails.getWallet());
@@ -84,4 +85,4 @@
 	   		}
 		 
    }
-   %>
+%>

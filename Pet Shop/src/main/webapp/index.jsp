@@ -15,7 +15,7 @@
     color:white;
 }
 h1{
-    font-family: 'Times New Roman';
+    font-family: sans-serif;
     padding-top: 10px;
     padding-left: 10px;
 }
@@ -79,12 +79,12 @@ color: black;
 
  }
  body{
-    background:linear-gradient(rgba(0,0,0,.4)50%,rgb(0,0,0,.4)50%),url("./Images/loginbackground.jpg");
-    background-size: cover;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-    color: white;
-}
+    background:linear-gradient(rgba(0,0,0,.3)50%,rgb(0,0,0,.3)50%),url("./Images/background7.jpg");
+    background-repeat: no-repeat;
+	background-position:center;
+	background-size: cover;
+	background-attachment: fixed;
+	color: white;
 
 </style>
 </head>

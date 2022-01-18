@@ -13,10 +13,9 @@ CartItemsDAO cartItemsDao=new CartItemsDAO();
 List<CartItems> cartList=(List<CartItems>)session.getAttribute("cartList");
 
 for(CartItems cartItems:cartList){
-      cartItemsDao.delete(cartItems.getItemId());
+      cartItemsDao.deleteCartItem(cartItems.getItemId());
 }
 
 PrintWriter write=response.getWriter();
 write.print("All Cart Items Are Deleted");
-
 %>

@@ -15,95 +15,87 @@ import com.petshop.util.ConnectionUtil;
 public class OrdersDAO{
 	
 	// To get connection from connection util
-	ConnectionUtil obj = new ConnectionUtil();
+	ConnectionUtil connectionUtil = new ConnectionUtil();
+	Connection connection=null;
+	String query="";
+	PreparedStatement pstmt=null;
+	ResultSet resultSet=null;
 	
+	
+	// commit every DML operation
 	public void commit() {
-		Connection con;
 		try {
-			con = obj.getDbConnect();
-			String query = "commit";
-			PreparedStatement pstmt = con.prepareStatement(query);
+			connection = connectionUtil.getDbConnect();
+			query = "commit";
+			pstmt = connection.prepareStatement(query);
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	//To insert the values on orders table
-	public void insert(Orders ord) {
-		Connection con;
+	//insert order 
+	public void insertOrder(Orders ord) {
 		try {
-			con = obj.getDbConnect();
-			String query = "insert into orders(Customer_id,total_price) \r\n"
+			connection = connectionUtil.getDbConnect();
+			query = "insert into orders(Customer_id,total_price) \r\n"
 					+ "values(?,?)";
-			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt = connection.prepareStatement(query);
 			pstmt.setInt(1, ord.getCustomer().getCustomerId());
 			pstmt.setDouble(2, ord.getTotalprice());
 			pstmt.executeUpdate();
 			commit();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
         
-	// To cancel particular order from order table
-	public void updateStatus(Orders order)  {
-		Connection con;
+	// Cancel order
+	public void updateOrderStatus(Orders order)  {
 		try {
-			con = obj.getDbConnect();
-			String query = "update orders set order_status='cancelled' where order_id=?";
-			PreparedStatement pstmt = con.prepareStatement(query);
+			connection = connectionUtil.getDbConnect();
+			query = "update orders set order_status='cancelled' where order_id=?";
+			pstmt = connection.prepareStatement(query);
 			pstmt.setInt(1, order.getOrderId());
 			pstmt.executeUpdate();
 			commit();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
     
-	// To show my orders 
-	
+	// To show my orders 	
 	public List<Orders> showMyOrders(int cusId) {
-		Connection con;
 		try {
-			con = obj.getDbConnect();
-			String query = "select * from orders o inner join order_items oi"
+			connection = connectionUtil.getDbConnect();
+			query = "select * from orders o inner join order_items oi"
 					+ "on o.order_id=oi.order_id where customer_id='"+cusId+"'";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet re = pstmt.executeQuery();
-			while (re.next()) {				
+			pstmt = connection.prepareStatement(query);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
-
 	}
-    // To get last orderId value to insert
-	public int orderId() {
-		Connection con;
+	
+   
+	// To get last orderId value to insert
+	public int getCurrentOrderId() {
 		int orderid=0;
 		try {
-			con = obj.getDbConnect();
-			String query = "select max(order_id) from orders";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet re = pstmt.executeQuery();
-			while (re.next()) {
-				orderid=re.getInt(1);
+			connection = connectionUtil.getDbConnect();
+			query = "select max(order_id) from orders";
+			pstmt = connection.prepareStatement(query);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				orderid=resultSet.getInt(1);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
        return orderid;
-	}
-
-	
+	}	
 }

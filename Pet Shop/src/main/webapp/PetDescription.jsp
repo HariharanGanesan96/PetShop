@@ -25,6 +25,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+	text-transform: capitalize;
 }
 
 .navigation {
@@ -150,19 +151,21 @@ table td p{
 </head>
 <body>
 	<%
-	//List<PetDetails> petList=new ArrayList<PetDetails>();
-	PetDetails pet = new PetDetails();
-	PetDAO petdao = new PetDAO();
-	int petid = Integer.parseInt(request.getParameter("petid"));
-	pet = petdao.showPet(petid);
-	session.setAttribute("pet", pet);
-	Customers customerDetails = (Customers) session.getAttribute("customer");
-	SimpleDateFormat formet = new SimpleDateFormat("dd-MM-yyyy");
-	Date date = pet.getPetDob();
+	
 
-	String dob = formet.format(date);
+		//List<PetDetails> petList=new ArrayList<PetDetails>();
+		PetDetails pet = new PetDetails();
+		PetDAO petdao = new PetDAO();
+		int petid = Integer.parseInt(request.getParameter("petid"));
+		pet = petdao.showCurrentPet(petid);
+		session.setAttribute("pet", pet);
+		Customers customerDetails = (Customers) session.getAttribute("customer");
+		SimpleDateFormat formet = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = pet.getPetDob();
 
-	session.setAttribute("message", " ");
+		String dob = formet.format(date);
+
+		session.setAttribute("message", " ");
 	%>
 	<div class="navigation">
 		<h1>
@@ -186,7 +189,7 @@ table td p{
 		<table>
 			<tbody>
 				<tr>
-					<td><img src="<%=pet.getPetImage()%>" alt=""></td>
+					<td><img src="./Pets/<%=pet.getPetImage()%>" alt=""></td>
 					<td>
 					    <p>
 							<b>Id</b>
@@ -231,7 +234,7 @@ table td p{
 		</table>
 
 		<div id="description">
-			<p>
+			<p style="	text-transform: none;">
 				<b>Description: </b><br><%=pet.getDescription()%>
 			<p>
 			<p>

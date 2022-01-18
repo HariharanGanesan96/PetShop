@@ -12,35 +12,36 @@ import com.petshop.model.CartItems;
 import com.petshop.model.Customers;
 import com.petshop.util.ConnectionUtil;
 
+public class CartItemsDAO implements CartItemsInterface {
 
+	// To get Connection from connection jdbc
+	ConnectionUtil connectionUtil = new ConnectionUtil();
+	List<CartItems> cartList = new ArrayList<CartItems>();
+	CartItems cartItem = new CartItems();
+	PreparedStatement pstmt = null;
+	ResultSet resultSet = null;
+	Connection connection;
+	String query = "";
 
-
-
-public class CartItemsDAO implements CartItemsInterface  {
-	
-	       // To get Connection from connection util
-	       ConnectionUtil obj = new ConnectionUtil();
-	       PreparedStatement pstmt =null;
-	       
-	   	public void commit() {
-			Connection con;
-			try {
-				con = obj.getDbConnect();
-				String query = "commit";
-				PreparedStatement pstmt = con.prepareStatement(query);
-				pstmt.executeUpdate();
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	       
-	    public void insert(CartItems cartit) {		
-		Connection con;
-	
+	// Commit during DML operation
+	public void commit() {
 		try {
-			con = obj.getDbConnect();
-			String query = "insert into Cart_items(pet_id,customer_id,quantity,unit_price,total_price) values(?,?,?,?,?)";
+			connection = connectionUtil.getDbConnect();
+			query = "commit";
+			pstmt = connection.prepareStatement(query);
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Insert Cart Items
+	public void insertCartItem(CartItems cartit) {
+		Connection con;
+
+		try {
+			con = connectionUtil.getDbConnect();
+			query = "insert into Cart_items(pet_id,customer_id,quantity,unit_price,total_price) values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, cartit.getPet().getPetId());
 			pstmt.setInt(2, cartit.getCustomer().getCustomerId());
@@ -50,97 +51,80 @@ public class CartItemsDAO implements CartItemsInterface  {
 			pstmt.executeUpdate();
 			commit();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
 
-	// To update order qty
-	public void updateQty(int itemId,int qty){		
-		String query = "update Cart_items set Quantity=? where item_id=?";
-		PreparedStatement pstmt;
+	// To update cartItems Quantity
+	public void updateCartItemQuantity(int itemId, int qty) {
+		query = "update Cart_items set Quantity=? where item_id=?";
 		try {
-			Connection con = obj.getDbConnect();
-			pstmt = con.prepareStatement(query);
+			connection = connectionUtil.getDbConnect();
+			pstmt = connection.prepareStatement(query);
 			pstmt.setInt(1, qty);
 			pstmt.setInt(2, itemId);
 			pstmt.executeUpdate();
 			commit();
 		} catch (SQLException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
-	public void delete(int itemId) {
-		Connection con;
+	// Delete Cart item
+	public void deleteCartItem(int itemId) {
 		try {
-			con = obj.getDbConnect();
-			String query = "delete from cart_items where item_id="+itemId+"";
-			PreparedStatement pstmt = con.prepareStatement(query);
+			connection = connectionUtil.getDbConnect();
+			query = "delete from cart_items where item_id=" + itemId + "";
+			pstmt = connection.prepareStatement(query);
 			pstmt.executeUpdate();
 			commit();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
-	public List<CartItems> showMyCart(Customers customer)  {	
-		Connection con;
-	     List<CartItems> cartList= new ArrayList<CartItems>();
+	// Show My Cart Items
+	public List<CartItems> showAllCartItems(Customers customer) {
+
+		
 		try {
-			con = obj.getDbConnect();
-			CartItems cartItem=new CartItems();
-			String query = "select ci.item_id,ci.pet_id,ci.customer_id,ci.quantity,ci.unit_price,ci.total_price,p.pet_type,p.pet_name,pet_image from cart_items ci inner join pet_details p on p.pet_id=ci.pet_id where ci.customer_id="+customer.getCustomerId()+" order by ci.item_id";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet resultSet = pstmt.executeQuery(); 
+			connection = connectionUtil.getDbConnect();
+			query = "select ci.item_id,ci.pet_id,ci.customer_id,ci.quantity,ci.unit_price,ci.total_price,p.pet_type,p.pet_name,pet_image from cart_items ci inner join pet_details p on p.pet_id=ci.pet_id where ci.customer_id="
+					+ customer.getCustomerId() + " order by ci.item_id";
+			pstmt = connection.prepareStatement(query);
+			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
-				cartItem=new CartItems(resultSet.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getDouble(5),resultSet.getDouble(6));
+				cartItem = new CartItems(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3),
+						resultSet.getInt(4), resultSet.getDouble(5), resultSet.getDouble(6));
 				cartItem.getPet().setPetType(resultSet.getString(7));
 				cartItem.getPet().setPetName(resultSet.getString(8));
 				cartItem.getPet().setPetImage(resultSet.getString(9));
-				
-			    cartList.add(cartItem);
+				cartList.add(cartItem);
 			}
-			 return cartList;
-			 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return cartList;
 	}
-	
-	public CartItems showCart(int itemId)  {	
-		Connection con;
-	     CartItems cartItems= new CartItems();
+
+	// Show Particular Cart Item
+	public CartItems showCartItem(int itemId) {
 		try {
-			con = obj.getDbConnect();
-			String query = "select * from cart_items where item_id="+itemId+"";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet resultSet = pstmt.executeQuery(); 
+			connection = connectionUtil.getDbConnect();
+			query = "select * from cart_items where item_id=" + itemId + "";
+			pstmt = connection.prepareStatement(query);
+			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
-				cartItems=new CartItems(resultSet.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getDouble(5),resultSet.getDouble(6));						 
-//			    cartItems.setItemId(resultSet.getInt(1));
-//			    cartItems.getPet().setPetId(resultSet.getInt(2));
-//			    cartItems.getCustomer().setCustomerId(resultSet.getInt(3));
-//			    cartItems.setQuantity(resultSet.getInt(4));
-//			    cartItems.setUnitPrice(resultSet.getDouble(5));
-//			    cartItems.setTotalPrice(resultSet.getDouble(6));
-			}	 
+				cartItem = new CartItems(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3),
+						resultSet.getInt(4), resultSet.getDouble(5), resultSet.getDouble(6));
+			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return cartItems;
+		return cartItem;
 	}
 
-	
 }

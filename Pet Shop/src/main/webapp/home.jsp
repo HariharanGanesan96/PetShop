@@ -31,6 +31,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+	text-transform: capitalize;
 }
 
 .navigation {
@@ -96,7 +97,8 @@ h1 {
 	float: right;
 	padding-right: 20px;
 	margin-top: 2px;
-	font-size: 20px; font-weight : bold;
+	font-size: 20px;
+	font-weight: bold;
 	text-decoration: none;
 	transition: 0.5s;
 	font-weight: bold;
@@ -172,11 +174,13 @@ input:focus {
 <body>
 
 	<%
-	List<PetDetails> petList = new ArrayList<PetDetails>();
-	Customers customerDetails = (Customers) session.getAttribute("customer");
-	PetDetails pet = new PetDetails();
-	PetDAO petdao = new PetDAO();
-	petList = petdao.showAllpets(customerDetails);
+	
+
+		List<PetDetails> petList = new ArrayList<PetDetails>();
+		Customers customerDetails = (Customers) session.getAttribute("customer");
+		PetDetails pet = new PetDetails();
+		PetDAO petdao = new PetDAO();
+		petList = petdao.showAllpetsDetails(customerDetails);
 	%>
 
 	<div class="navigation">
@@ -184,9 +188,9 @@ input:focus {
 			<i class="fas fa-paw" style="color: white;"></i> Pet Shop
 		</h1>
 		<form action="Search.jsp">
-		<input type="search" name="search" id="searchinput"
-			placeholder="Enter pet category or name">
-		<button type="submit" id="search">search</button>
+			<input type="search" name="search" id="searchinput"
+				placeholder="Enter pet category or name">
+			<button type="submit" id="search">search</button>
 		</form>
 		<ul id="menu">
 			<li><a href="myprofile.jsp">My Profile</a></li>
@@ -240,8 +244,7 @@ input:focus {
 											:
 											<%=petDetails.getAvilableQty()%></p>
 										<p>
-											<a
-												href="PetDescription.jsp?petid=<%=petDetails.getPetId()%>"><button>view</button></a>
+											<a href="PetDescription.jsp?petid=<%=petDetails.getPetId()%>"><button>view</button></a>
 										</p>
 									</td>
 								</tr>
@@ -265,7 +268,7 @@ input:focus {
 				</tr>
 			</tbody>
 		</table>
-	</div>	
+	</div>
 </body>
 </html>
 </html>

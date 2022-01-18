@@ -45,14 +45,14 @@ public class updateprofile extends HttpServlet{
 //         System.out.print(userName!=customerDetails.getUserName());
          customers.setUserName(userName);
          
-         if((customerDao.ValidatUsername(customers)==false) && (!userName.equals(customerDetails.getUserName()))) {
+         if((customerDao.validateUsername(customers)==false) && (!userName.equals(customerDetails.getUserName()))) {
         	updateProfile+="username not avliable";
         	flag=false;
          }
          String password=req.getParameter("password");
          String email=req.getParameter("email");
          customers.setEmail(email);
-         if((customerDao.ValidatUsername(customers)==false) && (!email.equals(customerDetails.getEmail()))) {
+         if((customerDao.validateUsername(customers)==false) && (!email.equals(customerDetails.getEmail()))) {
          	updateProfile +="  email not avliable";
          	flag=false;
           }
@@ -68,7 +68,7 @@ public class updateprofile extends HttpServlet{
          customerDetails.setNumber(number);
          customerDetails.setGender(gender);
          
-         customerDao.update(customerDetails);
+         customerDao.updateCustomerDetails(customerDetails);
          updateProfile="profile updated";
          }
          session.setAttribute("profileMessage", updateProfile);

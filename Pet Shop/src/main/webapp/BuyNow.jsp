@@ -8,7 +8,8 @@
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<% 
+<%
+
    int quantity=Integer.parseInt(request.getParameter("quantity"));
 
    PetDetails pet=( PetDetails)session.getAttribute("pet");
@@ -32,9 +33,9 @@
    orders.setTotalprice((quantity*pet.getPetprice()));
    
    // insert values in orders
-   ordersDao.insert(orders);
+   ordersDao.insertOrder(orders);
      
-   int orderId=ordersDao.orderId();  
+   int orderId=ordersDao.getCurrentOrderId();  
    orderItems.getOrders().setOrderId(orderId);
    orderItems.getPet().setPetId(pet.getPetId());
    orderItems.setQuantity(quantity);
@@ -42,19 +43,19 @@
    orderItems.setTotalPrice((quantity*pet.getPetprice()));
    
    // insert the values in order items
-   orderItemsDao.insert(orderItems);
+   orderItemsDao.insertOrderItems(orderItems);
    
    //update pet available quantity
    pet.setAvilableQty((pet.getAvilableQty()-quantity));
-   petDao.updatePetAviQty(pet);
+   petDao.updatePetAvailableQuantity(pet);
    
    //update buyer wallet
    customerDetails.setWallet(customerDetails.getWallet()-(quantity*pet.getPetprice()));
-   customerDao.updateWallet(customerDetails);
+   customerDao.updateCustomerWallet(customerDetails);
    
    //update seller wallet
    petCustomerDetails.setWallet(petCustomerDetails.getWallet()+(quantity*pet.getPetprice()));
-   customerDao.updateWallet(petCustomerDetails);
+   customerDao.updateCustomerWallet(petCustomerDetails);
    
    write.print("order placed sucussfully "+
                "\n Order Amount:"+(quantity*pet.getPetprice())+
@@ -77,5 +78,4 @@
    		}
 	 
    }
-  
-  %>
+%>

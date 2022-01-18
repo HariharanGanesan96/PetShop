@@ -28,6 +28,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+    text-transform: capitalize;
 }
 
 .navigation {

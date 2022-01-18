@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionUtil {
 	
 		
-		public Connection getDbConnect() throws SQLException, ClassNotFoundException {
+		public static Connection getDbConnect() throws SQLException, ClassNotFoundException {
 			
 
 			Class.forName("oracle.jdbc.OracleDriver");

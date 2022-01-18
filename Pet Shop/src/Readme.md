@@ -90,8 +90,6 @@
   
   20. Update address details.
   
-  21. Update wallet.
-
-  22. update profile picture
+  21. Recharge wallet.
   
-  23. Logout.
+  22. Logout.

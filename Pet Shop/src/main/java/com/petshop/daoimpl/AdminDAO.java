@@ -8,59 +8,56 @@ import java.sql.SQLException;
 import com.petshop.model.Admin;
 import com.petshop.util.ConnectionUtil;
 
-
-
-
-
-
-
 public class AdminDAO {
+
 	ConnectionUtil obj = new ConnectionUtil();
-	
-	public void insert(Admin adm) throws SQLException, ClassNotFoundException {
-	Connection con = obj.getDbConnect();
-	String query = "insert into animals_Adminuser values(?,?,?,?,?)";
-	PreparedStatement pstmt = con.prepareStatement(query);
-	pstmt.setInt(1, adm.getAdminId());
-	pstmt.setString(2, adm.getUserName());
-	pstmt.setString(3, adm.getPassword());
-	pstmt.setString(3, adm.getPassword());
-	pstmt.setString(4, adm.getPassword());
-	pstmt.setDate(5, adm.getRegisterDate());
-	
-	System.out.println(pstmt.executeUpdate() + " rows inserted");
-}
+	PreparedStatement pstmt = null;
 
-public void update(Admin adm) throws SQLException, ClassNotFoundException {
-	Connection con = obj.getDbConnect();
-	String query = "update animals_Adminuser set admin_password=? where admin_id=? ";
-	PreparedStatement pstmt = con.prepareStatement(query);
-	pstmt.setString(1, adm.getPassword());
-	pstmt.setInt(2, adm.getAdminId());
-	System.out.println(pstmt.executeUpdate() + " rows updated");
-}
-
-public void delete(Admin anim) throws SQLException, ClassNotFoundException {
-	Connection con = obj.getDbConnect();
-	String query = "delete from animals_Adminuser where admin_id=?";
-	PreparedStatement pstmt = con.prepareStatement(query);
-	pstmt.setInt(1, anim.getAdminId());
-	System.out.println(pstmt.executeUpdate() + " rows deleted");
-}
-
-// Admin profile
-public Admin show(String username) throws SQLException, ClassNotFoundException {
-	
-	Connection con = obj.getDbConnect();
-	Admin admin=null;
-	String query = "select * from Admin_details where admin_username='"+username+"'";
-	PreparedStatement pstmt = con.prepareStatement(query);
-	ResultSet re = pstmt.executeQuery();
-	while (re.next()) {
-	   admin=new Admin(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),re.getString(4),re.getString(6),
-			          re.getLong(7),re.getDate(8));
+	// Admin Register
+	public void insert(Admin admin) throws SQLException, ClassNotFoundException {
+		Connection con = obj.getDbConnect();
+		String query = "insert into admin_details values(?,?,?,?,?)";
+		pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, admin.getAdminId());
+		pstmt.setString(2, admin.getUserName());
+		pstmt.setString(3, admin.getPassword());
+		pstmt.setString(3, admin.getPassword());
+		pstmt.setString(4, admin.getPassword());
+		pstmt.setDate(5, admin.getRegisterDate());
+		pstmt.executeUpdate();
 	}
-     return admin;
-}
+   
+	//Update Admin
+	public void update(Admin admin) throws SQLException, ClassNotFoundException {
+		Connection con = obj.getDbConnect();
+		String query = "update admin_details set admin_password=? where admin_id=? ";
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1, admin.getPassword());
+		pstmt.setInt(2, admin.getAdminId());
+		pstmt.executeUpdate();
+	}
+
+	// Delete Admin
+	public void delete(Admin anim) throws SQLException, ClassNotFoundException {
+		Connection con = obj.getDbConnect();
+		String query = "delete from animals_Adminuser where admin_id=?";
+		pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, anim.getAdminId());
+		pstmt.executeUpdate();
+	}
+
+     // Admin profile Details
+	    public Admin show(String username) throws SQLException, ClassNotFoundException {
+		Connection con = obj.getDbConnect();
+		Admin admin = null;
+		String query = "select * from Admin_details where admin_username='" + username + "'";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet re = pstmt.executeQuery();
+		while (re.next()) {
+			admin = new Admin(re.getInt(1), re.getString(2), re.getString(3), re.getString(4), re.getString(4),
+					re.getString(6), re.getLong(7), re.getDate(8));
+		}
+		return admin;
+	}
 
 }

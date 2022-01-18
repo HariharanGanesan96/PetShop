@@ -12,7 +12,8 @@
     pageEncoding="ISO-8859-1"%>
 
 
-<%  
+<%
+  
     boolean available=true;
 
     PrintWriter out1=response.getWriter();
@@ -24,7 +25,7 @@
     
     List<CartItems> cartList=new ArrayList<CartItems>();
     
-    cartList=cartItemDao.showMyCart(customerDetails);
+    cartList=cartItemDao.showAllCartItems(customerDetails);
     
     PrintWriter write=response.getWriter();
     int quantity=Integer.parseInt(request.getParameter("quantity"));  
@@ -56,7 +57,7 @@
     
     
     CartItemsDAO cartItemsDao=new CartItemsDAO();
-    cartItemsDao.insert(cart);
+    cartItemsDao.insertCartItem(cart);
     write.print("item add to cart");
    }
     }
@@ -68,5 +69,5 @@
     		write.print(e+"\n\n Available Pet Quantity : "+pet.getAvilableQty());
     	}
     }
-    %>
+%>
 

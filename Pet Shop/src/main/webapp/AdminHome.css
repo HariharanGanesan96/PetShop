@@ -1,5 +1,6 @@
 @charset "ISO-8859-1";
-*{
+
+    *{
     margin: 0;
     padding: 0;
     color: white;
@@ -100,8 +101,8 @@ input:focus{
 }
 
 #pets img{
-    width: 210px;
-    height: 260px;
+    width: 350px;
+    height: 280px;
     border-radius: 10px;
    
 }
@@ -134,3 +135,4 @@ input:focus{
     font-weight: bold;
 
 }
+

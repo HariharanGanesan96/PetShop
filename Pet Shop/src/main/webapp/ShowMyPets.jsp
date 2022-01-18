@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/aeca6704b2.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="	text-transform: capitalize;">
 <%      
         Customers customerDetails=(Customers) session.getAttribute("customers");
         List<PetDetails> petList=new ArrayList<PetDetails>();

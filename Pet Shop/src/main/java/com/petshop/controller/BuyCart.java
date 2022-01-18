@@ -35,7 +35,7 @@ public class BuyCart extends HttpServlet{
     	   HttpSession session=req.getSession();
            PrintWriter write=resp.getWriter();
     	   CartItemsDAO cartDao=new CartItemsDAO();
-    	   CartItems cartItems=cartDao.showCart(itemId);
+    	   CartItems cartItems=cartDao.showCartItem(itemId);
     	   
     	   Customers customerDetails=(Customers)session.getAttribute("customer"); 
     	   Orders orders=new Orders();
@@ -44,7 +44,7 @@ public class BuyCart extends HttpServlet{
     	   OrderItemsDAO orderItemsDao=new OrderItemsDAO();
     	   PetDAO petDao=new PetDAO();
     	   
-    	   PetDetails pet =petDao.showPet(cartItems.getPet().getPetId());
+    	   PetDetails pet =petDao.showCurrentPet(cartItems.getPet().getPetId());
     	   CustomerDAO customerDao=new CustomerDAO();   
     	   Customers petCustomerDetails=customerDao.customerDetails(pet.getCustomer().getUserName());
     	   
@@ -56,9 +56,9 @@ public class BuyCart extends HttpServlet{
     	   orders.setTotalprice(cartItems.getTotalPrice());
     	   
     	   // insert values in orders
-    	   ordersDao.insert(orders);
+    	   ordersDao.insertOrder(orders);
     	     
-    	   int orderId=ordersDao.orderId();  
+    	   int orderId=ordersDao.getCurrentOrderId();  
     	   orderItems.getOrders().setOrderId(orderId);
     	   orderItems.getPet().setPetId(pet.getPetId());
     	   orderItems.setQuantity(cartItems.getQuantity());
@@ -66,19 +66,19 @@ public class BuyCart extends HttpServlet{
     	   orderItems.setTotalPrice(cartItems.getTotalPrice());
     	   
     	   // insert the values in order items
-    	   orderItemsDao.insert(orderItems);
+    	   orderItemsDao.insertOrderItems(orderItems);
     	   
     	   //update pet available quantity
     	   pet.setAvilableQty((pet.getAvilableQty()-cartItems.getQuantity()));
-    	   petDao.updatePetAviQty(pet);
+    	   petDao.updatePetAvailableQuantity(pet);
     	   
     	   //update buyer wallet
     	   customerDetails.setWallet(customerDetails.getWallet()-cartItems.getTotalPrice());
-    	   customerDao.updateWallet(customerDetails);
+    	   customerDao.updateCustomerWallet(customerDetails);
     	   
     	   //update seller wallet
     	   petCustomerDetails.setWallet(petCustomerDetails.getWallet()+cartItems.getQuantity());
-    	   customerDao.updateWallet(petCustomerDetails);
+    	   customerDao.updateCustomerWallet(petCustomerDetails);
     	   
     	   write.print("order placed sucussfully");
     	   }

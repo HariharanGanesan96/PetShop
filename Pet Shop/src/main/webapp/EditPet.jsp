@@ -30,6 +30,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+	text-transform: capitalize;
 }
 
 .navigation {
@@ -194,16 +195,18 @@ textarea {
 
 <body>
 	<%
-	PetDetails pet = new PetDetails();
-	PetDAO petdao = new PetDAO();
-	int petId = Integer.parseInt(request.getParameter("petid"));
-	session.setAttribute("updatePet", petId);
-	pet = petdao.showPet(petId);
-	session.setAttribute("pet", pet);
-	Customers customerDetails = (Customers) session.getAttribute("customer");
-	SimpleDateFormat formet = new SimpleDateFormat("yyyy-dd-MM");
-	Date date = pet.getPetDob();
-	String dob = formet.format(date);
+	
+
+		PetDetails pet = new PetDetails();
+		PetDAO petdao = new PetDAO();
+		int petId = Integer.parseInt(request.getParameter("petid"));
+		session.setAttribute("updatePet", petId);
+		pet = petdao.showCurrentPet(petId);
+		session.setAttribute("pet", pet);
+		Customers customerDetails = (Customers) session.getAttribute("customer");
+		SimpleDateFormat formet = new SimpleDateFormat("yyyy-dd-MM");
+		Date date = pet.getPetDob();
+		String dob = formet.format(date);
 	%>
 	<div class="navigation">
 		<h1>

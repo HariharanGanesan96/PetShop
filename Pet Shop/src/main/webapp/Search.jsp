@@ -31,6 +31,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+	text-transform: capitalize;
 }
 
 .navigation {
@@ -212,7 +213,7 @@ input:focus {
 						<table id="pets">
 							<tbody>
 								<tr>
-									<td><img src="<%=petDetails.getPetImage()%>"
+									<td><img src="./Pets/<%=petDetails.getPetImage()%>"
 										alt="petimage"></td>
 									<td id="petdetails">
 										<p>Type</p>

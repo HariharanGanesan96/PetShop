@@ -19,7 +19,7 @@
 		Customers customer = (Customers) session.getAttribute("customer");
 		customer.setWallet(customer.getWallet() + wallet);
 		CustomerDAO customerDao = new CustomerDAO();
-		customerDao.updateWallet(customer);
+		customerDao.updateCustomerWallet(customer);
 		write.print("Amount Added");
 	}
 	%>

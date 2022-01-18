@@ -18,11 +18,12 @@
 <style type="text/css">
 body {
 	background-image: linear-gradient(rgba(0, 0, 0, .5) 50%,
-		rgb(0, 0, 0, .5) 50%), url("./Images/myprofilebackground.jpg");
+		rgb(0, 0, 0, .5) 50%), url("./Images/background1.jpg");
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	text-transform: capitalize;
 	color: white;
 }
 
@@ -88,7 +89,7 @@ form {
 }
 
 table td {
-	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-family: sans-serif;
 	font-size: x-large;
 	height: 25px;
 	width: 200px;
@@ -97,16 +98,11 @@ table td {
 
 table img {
 	width: 300px;
-	height: 400px;
+	height: 380px;
 	border: 1px solid;
 	border-color: black;
+	border-radius: 10px;
 }
-
-table tr, td {
-	margin-left: 30px;
-	padding-top: 15px;
-}
-
 #update {
 	width: 130px;
 	height: 30px;
@@ -178,6 +174,18 @@ table tr, td {
 	margin-top: 40px;
 	margin-left: 40px;
 }
+
+
+pre{
+margin-left:20px;
+font-family: sans-serif;
+font-weight: bold;
+font-size: x-large;
+display: inline;
+	
+}
+
+
 </style>
 </head>
 <body>
@@ -207,50 +215,32 @@ table tr, td {
 	<table>
 		<tbody>
 			<tr>
-				<td rowspan="7"><img
+				<td><img
 					src="./Profile Picture/<%=customerDetails.getImage()%>"
 					alt="user picture">
-					<p>
+					</td>
+				<td style="width: 600px;">
+								<p><pre >First Name </pre>: <%=customerDetails.getFirstName()%> <%=customerDetails.getLastName()%> </p>
+								<p><pre >User Name </pre>: <%=customerDetails.getUserName()%></p>
+								<p><pre>Gender       </pre>: <%=customerDetails.getGender() %></p>
+								<p><pre>Email          </pre>: <%=customerDetails.getEmail()%></p>
+							    <p><pre>Mobile        </pre>: <%=customerDetails.getNumber()%></p>
+								<p><pre>Address     </pre>: <%=customerDetails.getAddress()%>, <%=customerDetails.getCity()%>
+								, <%=customerDetails.getPincode()%></p>
+								<p><pre>wallet         </pre>: Rs.<%=customerDetails.getWallet()%></p>
+		
+				</td>
+				</tr>
+				<tr>
+				<td colspan="3">
+				     <p>
 						Update Image : <input type="file" id="image" name="image">
 						<button type="button" id="ok" onclick="UpdateImage()">OK</button>
-					</p></td>
-
-				<td>Firstname</td>
-				<td>: <%=customerDetails.getFirstName()%></td>
-				<td>Lastname</td>
-				<td>: <%=customerDetails.getLastName()%></td>
-			</tr>
-			<tr>
-				<td>UserName</td>
-				<td>: <%=customerDetails.getUserName()%></td>
-				<td>Gender </label></td>
-				<td>: <%=customerDetails.getGender()%></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td style="width: 250px;">: <%=customerDetails.getEmail()%></td>
-				<td>Mobile</td>
-				<td>: <%=customerDetails.getNumber()%></td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td>: <%=customerDetails.getPassword()%></td>
-				<td>Street</td>
-				<td>: <%=customerDetails.getAddress()%></td>
-
-
-			</tr>
-			<tr>
-				<td>City</td>
-				<td>: <%=customerDetails.getCity()%></td>
-				<td>Pincode</td>
-				<td>: <%=customerDetails.getPincode()%></td>
-			</tr>
-			<tr>
-
-				<td>wallet</td>
-				<td>: Rs.<%=customerDetails.getWallet()%></td>
-			</tr>
+					</p>
+				</td>
+					</tr>
+						
+				
 		</tbody>
 	</table>
 
@@ -293,10 +283,11 @@ table tr, td {
 			</tr>
 			<tr>
 				<td><label for="password">Password</label></td>
-				<td><input type="password" name="password"
+				<td><input type="password" name="password" id="password"
 					value="<%=customerDetails.getPassword()%>"
 					pattern="[a-zA-Z0-9!@#$%^&*()_+]{8,20}" required></td>
-				<td></td>
+				<td colspan="2" style="text-align: left;"><input
+					type="checkbox" onclick="showPassword()">Show Password</td>
 				<td></td>
 			</tr>
 			<tr>
@@ -312,12 +303,12 @@ table tr, td {
 
 			<tr>
 				<form action="UpdateAddress.jsp">
-				<td><label for="address">Street</label></td>
-				<td><input type="text" name="address" id="address"
-					value="<%=customerDetails.getAddress()%>" required></td>
-				<td><label for="city">City</label></td>
-				<td><input type="text" name="city" id="city"
-					" value="<%=customerDetails.getCity()%>" required></td>
+					<td><label for="address">Street</label></td>
+					<td><input type="text" name="address" id="address"
+						value="<%=customerDetails.getAddress()%>" required></td>
+					<td><label for="city">City</label></td>
+					<td><input type="text" name="city" id="city"
+						" value="<%=customerDetails.getCity()%>" required></td>
 			</tr>
 			<tr>
 				<td><label for="pincode">Pincode</label></td>
@@ -343,13 +334,14 @@ table tr, td {
 				<td><button id="updatewallet" onclick="UpdateWallet()"
 						type="button">Add</button></td>
 			</tr>
-		    <tr>
-		    <td> <a href="Logout.jsp"> <button type="button" id="logout">Logout</button> </a>
-		    </td>
-		    </tr>
+			<tr>
+				<td><a href="Logout.jsp">
+						<button type="button" id="logout">Logout</button>
+				</a></td>
+			</tr>
 		</tbody>
 	</table>
-	
+
 	<%
 	if (session.getAttribute("profileMessage") != "none") {
 		String message = (String) session.getAttribute("profileMessage");
@@ -431,6 +423,14 @@ table tr, td {
 	  	}  
 	  	}  
  
+  function showPassword() {
+	  var show = document.getElementById("password");
+	  if (show.type === "password") {
+	    show.type = "text";
+	  } else {
+	    show.type = "password";
+	  }
+	}
   
   
  <%String message = (String) session.getAttribute("profileMessage");

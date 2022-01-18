@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	
+
     Customers customerDetails = (Customers) session.getAttribute("customer");
    
 	CustomerDAO customerDao = new CustomerDAO();
@@ -21,29 +21,31 @@
 	int orderId = Integer.parseInt(request.getParameter("orderId"));
 	
 	order.setOrderId(orderId);
-	orderItemList = orderItemDao.getCurrentOrder(orderId);
+	orderItemList = orderItemDao.getCurrentOrderItemDetails(orderId);
 
 	int Amount = 0;
 	
 	for (OrderItems orderItem : orderItemList) {
 		
 		
-	pet = petDao.showPet(orderItem.getPet().getPetId());
+	pet = petDao.showCurrentPet(orderItem.getPet().getPetId());
 
 	pet.setAvilableQty((pet.getAvilableQty() + orderItem.getQuantity()));
-	petDao.updatePetAviQty(pet);
+	petDao.updatePetAvailableQuantity(pet);
 
 	Amount += orderItem.getTotalPrice();
 	
 	customerDetails.setWallet(customerDetails.getWallet() + (orderItem.getTotalPrice()));
-	customerDao.updateWallet(customerDetails);
+	customerDao.updateCustomerWallet(customerDetails);
 
 	customer = customerDao.customerDetails(pet.getCustomer().getCustomerId());
 	customer.setWallet(customer.getWallet() - orderItem.getTotalPrice());
-	customerDao.updateWallet(customer);
+	customerDao.updateCustomerWallet(customer);
 
 }
-    orderDao.updateStatus(order);
+    orderDao.updateOrderStatus(order);
     PrintWriter write = response.getWriter();
-    write.print("order cancelld \n credit amount :" + Amount + "\n Total Wallet balance :" + customerDetails.getWallet());
+    write.print("order cancelld "+
+                "\n credit amount :" + Amount + 
+                "\n Total Wallet balance :" + customerDetails.getWallet());
 %>

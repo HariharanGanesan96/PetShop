@@ -24,12 +24,13 @@
 }
 
 body {
-	background-image: linear-gradient(rgba(0, 0, 0, .5) 50%,
-		rgb(0, 0, 0, .5) 50%), url("./Images/background2.jpg");
+	background-image: linear-gradient(rgba(0, 0, 0, .4) 50%,
+		rgb(0, 0, 0, .4) 50%), url("./Images/background8.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
 	color: white;
+	text-transform: capitalize;
 }
 
 .navigation {
@@ -118,11 +119,13 @@ background-color: white;
 </head>
 <body>
 	<%
-	Customers customerDetails = new Customers();
-	customerDetails = (Customers) session.getAttribute("customer");
-	OrderItemsDAO orderItemDao = new OrderItemsDAO();
-	List<OrderItems> orderItemList = orderItemDao.showMyOrders(customerDetails);
-	SimpleDateFormat formet = new SimpleDateFormat("dd-MM-yyyy");
+	
+
+		Customers customerDetails = new Customers();
+		customerDetails = (Customers) session.getAttribute("customer");
+		OrderItemsDAO orderItemDao = new OrderItemsDAO();
+		List<OrderItems> orderItemList = orderItemDao.showMyOrdersItemsList(customerDetails);
+		SimpleDateFormat formet = new SimpleDateFormat("dd-MM-yyyy");
 	%>
 
 	<div class="navigation">

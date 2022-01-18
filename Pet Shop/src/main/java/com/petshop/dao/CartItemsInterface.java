@@ -7,15 +7,15 @@ import com.petshop.model.Customers;
 
 public interface CartItemsInterface {
  
-	   public void insert(CartItems cartit);
+	   public void insertCartItem(CartItems cartit);
 	   
-	   public void updateQty(int itemId,int qty);
+	   public void updateCartItemQuantity(int itemId,int qty);
 	   
-	   public void delete(int itemId);
+	   public void deleteCartItem(int itemId);
 	   
-	   public List<CartItems> showMyCart(Customers customer);
+	   public List<CartItems> showAllCartItems(Customers customer);
 	   
-	   public CartItems showCart(int itemId);
+	   public CartItems showCartItem(int itemId);
 	
 		
 }

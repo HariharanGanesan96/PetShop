@@ -26,6 +26,7 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
+	text-transform: capitalize;
 	color: white;
 }
 
@@ -170,14 +171,14 @@ margin-left: -260px;
 </head>
 <body>
 	<%
-	CartItemsDAO cartItemDao = new CartItemsDAO();
-	Customers customerDetails = new Customers();
-	customerDetails = (Customers) session.getAttribute("customer");
-	List<CartItems> cartList = new ArrayList<CartItems>();
-	cartList = cartItemDao.showMyCart(customerDetails);
-	PetDetails pet = new PetDetails();
-	PetDAO petDao = new PetDAO();
-	session.setAttribute("cartList", cartList);
+		CartItemsDAO cartItemDao = new CartItemsDAO();
+		Customers customerDetails = new Customers();
+		customerDetails = (Customers) session.getAttribute("customer");
+		List<CartItems> cartList = new ArrayList<CartItems>();
+		cartList = cartItemDao.showAllCartItems(customerDetails);
+		PetDetails pet = new PetDetails();
+		PetDAO petDao = new PetDAO();
+		session.setAttribute("cartList", cartList);
 	%>
 
 		<div class="navigation">
@@ -195,10 +196,12 @@ margin-left: -260px;
     
 	<table>
 		<%
-		double totalAmount = 0;
-		for (CartItems cartItems : cartList) {
+		
+
+				double totalAmount = 0;
+				for (CartItems cartItems : cartList) {
 			totalAmount += cartItems.getTotalPrice();
-			pet = petDao.showPet(cartItems.getPet().getPetId());
+			pet = petDao.showCurrentPet(cartItems.getPet().getPetId());
 		%>
 		<tr>
 			<td><img src="./Pets/<%=cartItems.getPet().getPetImage()%>" alt="petimage"></td>
