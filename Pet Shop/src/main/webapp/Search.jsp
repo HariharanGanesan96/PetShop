@@ -110,7 +110,7 @@ h1 {
 .petlist {
 	margin-top: 40px;
 	padding-top: 20px;
-	margin-left: 50px;
+	margin-left: 30px;
 	transition: 0.5s;
 }
 
@@ -125,7 +125,7 @@ h1 {
 }
 
 #pets {
-	margin-left: 45px;
+	margin-left: 25px;
 	margin-top: 20px;
 	line-height: 2;
 	font-size: 20px;
@@ -220,7 +220,7 @@ input:focus {
 										<p>Name</p>
 										<p>Color</p>
 										<p>price</p>
-										<p>Qty</p>
+										<p>available</p>
 										<p style="visibility: hidden;">empty</p>
 									</td>
 									<td>
@@ -241,7 +241,7 @@ input:focus {
 										</p>
 										<p>
 											:
-											<%=petDetails.getAvilableQty()%></p>
+											<%=petDetails.getAvilableQty()%> Quantity</p>
 										<p>
 											<a
 												href="PetDescription.jsp?petid=<%=petDetails.getPetId()%>"><button>view</button></a>

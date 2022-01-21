@@ -94,8 +94,8 @@
 		   		throw new LowWalletBalance();
 		   		}
 		   		catch(LowWalletBalance e){	
-		   			write.print(e+"\n Your wallet Balance"+customerDetails.getWallet()+
-		   					       "\n Product Amount"+ cartItems.getTotalPrice());
+		   			write.print(e+"\n Low wallet balance "+customerDetails.getWallet()+
+		   					       "\n Product amount"+ cartItems.getTotalPrice());
 		   		}
 			 
 		}

@@ -31,7 +31,7 @@
 		   PetDetails petDetails=petDao.showCurrentPet(cartItems.getPet().getPetId());
 		   if(petDetails.getAvilableQty()<cartItems.getQuantity()){
 	   flage=false;
-	   write.print("Quantity not Avialble item Id "+cartItems.getItemId());
+	   write.print("\n Sorry we can't process this request now "+"\n Quantity not Avialble Pet Id "+cartItems.getPet().getPetId()+"\n remove that item and try again");
 		   }
 	   }  
 	   
@@ -71,7 +71,7 @@
    customerDao.updateCustomerWallet(customerDetails);
    
    write.print("order placed successfully \n deducted amount : "
-                +totalPrice+"/n Wallet Amount : "+customerDetails.getWallet());
+                +totalPrice+"\n Wallet Amount : "+customerDetails.getWallet());
    }
    }
    else{

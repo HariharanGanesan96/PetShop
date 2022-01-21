@@ -21,8 +21,6 @@
 		String petDob = request.getParameter("dob");
 		SimpleDateFormat formet = new SimpleDateFormat("yyyy-mm-dd");
 		Date date = formet.parse(petDob);
-		System.out.println(petDob);
-		System.out.println(date);
 		String petColor = request.getParameter("color").toLowerCase();
 		double petPrice = Double.parseDouble(request.getParameter("price"));
 		String petImage = request.getParameter("imagelink");
@@ -42,7 +40,7 @@
 		petDetails.setAvilableQty(petQty);
 		petDetails.getCustomer().setCustomerId(customerDetails.getCustomerId());
 		petDao.updatePetDetails(petDetails);	
-		response.sendRedirect("EditPet.jsp?petid="+petId);
+		response.sendRedirect("MyPets.jsp");
 		}
 		
 		else{

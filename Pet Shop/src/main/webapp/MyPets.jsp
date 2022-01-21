@@ -46,41 +46,6 @@ h1 {
 	font-size: 25px;
 }
 
-#searchinput {
-	padding-left: 10px;
-	position: absolute;
-	font-size: 17px;
-	top: 13px;
-	left: 230px;
-	width: 300px;
-	height: 30px;
-	border: 1px solid;
-	border-color: tomato;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	background-color: transparent;
-	border-right: none;
-}
-
-#searchinput::placeholder {
-	color: white;
-}
-
-#search {
-	position: absolute;
-	left: 530px;
-	width: 100px;
-	height: 30px;
-	margin-top: -2px;
-	border: 1px solid;
-	border-color: tomato;
-	font-size: 17px;
-	font-weight: bold;
-	border-top-right-radius: 10px;
-	border-left: none;
-	background-color: tomato;
-}
-
 #search:hover {
 	background-color: white;
 	border-color: white;
@@ -179,9 +144,6 @@ h2:hover {
 		<h1>
 			<i class="fas fa-paw" style="color: white;"></i> Pet Shop
 		</h1>
-		<input type="search" id="searchinput"
-			placeholder="Enter pet category or name">
-		<button id="search">search</button>
 		<ul id="menu">
 			<li><a href="myprofile.jsp">My Profile</a></li>
 			<li><a href="mycart.jsp">My cart</a></li>

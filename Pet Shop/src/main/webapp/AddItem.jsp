@@ -188,6 +188,7 @@ textarea {
 	padding-top: 20px;
 	color: black;
 }
+
 </style>
 </head>
 
@@ -299,12 +300,9 @@ textarea {
 		%>
 		<script type="text/javascript">
 			alert("before Add animls please add address details");
+			  window.location = 'myprofile.jsp';
 		</script>
-		<a href="myprofile.jsp"
-			style="text-align: center; color: white; position: relative; top: 300px; text-decoration: none;"><h1>Click
-				to update Address</h1></a>
 		<%
-		;
 		}
 		%>
 	</div>

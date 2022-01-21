@@ -71,7 +71,7 @@ h1 {
 #search {
 	position: absolute;
 	left: 530px;
-	width: 100px;
+	width: 80px;
 	height: 30px;
 	margin-top: -2px;
 	border: 1px solid;
@@ -111,7 +111,7 @@ h1 {
 .petlist {
 	margin-top: 40px;
 	padding-top: 20px;
-	margin-left: 50px;
+	margin-left: 30px;
 	transition: 0.5s;
 }
 
@@ -126,7 +126,7 @@ h1 {
 }
 
 #pets {
-	margin-left: 45px;
+	margin-left: 25px;
 	margin-top: 20px;
 	line-height: 2;
 	font-size: 20px;
@@ -163,7 +163,7 @@ h1 {
 }
 
 #petdetails {
-	width: 70px;
+	width:100px;
 }
 
 input:focus {
@@ -217,11 +217,11 @@ input:focus {
 									<td><img src="./Pets/<%=petDetails.getPetImage()%>"
 										alt="petimage"></td>
 									<td id="petdetails">
-										<p>Type</p>
-										<p>Name</p>
-										<p>Color</p>
-										<p>price</p>
-										<p>Qty</p>
+										<p>Pet Type</p>
+										<p>Pet Name</p>
+										<p>Pet Color</p>
+										<p>Unit price</p>
+										<p>Available</p>
 										<p style="visibility: hidden;">empty</p>
 									</td>
 									<td>
@@ -242,7 +242,7 @@ input:focus {
 										</p>
 										<p>
 											:
-											<%=petDetails.getAvilableQty()%></p>
+											<%=petDetails.getAvilableQty()%> Quantity</p>
 										<p>
 											<a href="PetDescription.jsp?petid=<%=petDetails.getPetId()%>"><button>view</button></a>
 										</p>

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABS Register</title>
+<title>Register User</title>
 <link rel="stylesheet" href="Register.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,7 +16,6 @@
 * {
 	margin: 0;
 	padding: 0;
-	text-transform: capitalize;
 }
 
 #background {
@@ -153,13 +152,13 @@ input[type=number] {
 </style>
 </head>
 <body>
-	<!--Animal register-->
+	<!--register-->
 	<div id="background">
 		<h1>
 			<i class="fas fa-paw" style="color: white;"></i> Pet Shop
 		</h1>
 
-		<form action="register" name="registerform" class="registerform">
+		<form action="register" name="registerform" class="registerform" method="post">
 			<div id="image">
 				<img
 					src="https://images.pexels.com/photos/8473666/pexels-photo-8473666.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -174,14 +173,14 @@ input[type=number] {
 					<tr>
 						<td><label for="firstname">FirstName <span>*</span></label></td>
 						<td><input type="text" name="firstname" id="firstnameinput"
-							pattern="[a-zA-Z]{3,20}" title="Name contains only letter"
+							pattern="[a-zA-Z]{3,20}" title="minimum 3 characters and accept only alphabets"
 							placeholder="Firstname" required>
 						<p id="firstnamecomment"></p></td>
 					</tr>
 					<tr>
 						<td><label for="lastname">LastName <span>*</span></label></td>
 						<td><input type="text" name="lastname" id="lastnameinput"
-							pattern="[a-zA-Z]{3,20}" title="Name contains only letter"
+							pattern="[a-zA-Z]{3,20}" title="minimum 3 characters accept only alphabets"
 							placeholder="Lastname" required></td>
 					</tr>
 					<tr>
@@ -204,7 +203,7 @@ input[type=number] {
 						<td><input type="text" name="username"
 							onchange="validateUsername()" id="usernameinput"
 							placeholder="username" pattern="[a-zA-Z0-9]{8,20}"
-							title="minimum 8 character required " required></td>
+							title="minimum 8 character required and no special character" required></td>
 					</tr>
 					<tr>
 						<!--^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{8,15}-->
@@ -217,14 +216,14 @@ input[type=number] {
 						<td><label for="repassword">Re-Password <span>*</span></label></td>
 						<td><input type="password" onchange="validatePassword()"
 							name="Re-password" id="repasswordinput"
-							placeholder="Re enter password" required>
+							placeholder="Re enter password" pattern="[a-zA-Z0-9!@#$%^&*()_+]{8,20}" required>
 						<p id="repasswordcomment"></p></td>
 
 					</tr>
 					<tr>
 						<td><label for="mobile">Phone <span>*</span></label></td>
 						<td><input type="number" name="mobile" id="mobileinput"
-							pattern="[7-9]{1}[0-9]{9}" placeholder="MobileNumber" required></td>
+							pattern="[6-9]{1}[0-9]{9}" placeholder="MobileNumber" title="Start with 6789 and 10 character" required></td>
 					</tr>
 					<tr>
 						<td><button type="submit" id="register">Register</button></td>
@@ -232,39 +231,29 @@ input[type=number] {
 					</tr>
 				</thead>
 			</table>
-			<datalist id="genderlist">
-				<option value="Male"></option>
+			<select id="genderlist">
+				<option value="Male" selected="selected"></option>
 				<option value="Female"></option>
 				<option value="Others"></option>
-			</datalist>
+			</select>
 		</form>
 	</div>
-	<%
-	if (session.getAttribute("Register") != null) {
-	%>
-	<script type="text/javascript">
-		alert("Somthing went to wrong try again");
-	</script>
-
-	<%
-	session.setAttribute("Register", "none");
-	}
-	%>
 	<script>
 		function validatePassword() {
 			let password = document.getElementById("passwordinput").value;
 			let repassword = document.getElementById("repasswordinput").value;
 			let comment = document.getElementById("repasswordcomment");
+			document.getElementById("register").disabled = false;
 			if (password == repassword) {
-				console.log("called if");
 				comment.style.display = "none";
+				d
 			} else {
-
 				comment.style.display = "block";
 				comment.innerHTML = "password does not match";
 				comment.style.color = "red";
 				comment.style.fontSize = "17px";
 				console.log("called else");
+				document.getElementById("register").disabled = true;
 			}
 		}
 		function validateUsername() {

@@ -141,12 +141,29 @@ table td p{
 }
 
 #quantity{
-	width: 50px;
+	width: 20px;
 	height: 25px;
 	border:none;
 	border-radius: 5px;
-	
+	background-color: transparent;
+	color: white;
+	text-align: center;
+    position: relative;
+    top:-3px;
+    left: 3px;
+    outline: none;
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
     </style>
 </head>
 <body>
@@ -237,12 +254,13 @@ table td p{
 			<p style="	text-transform: none;">
 				<b>Description: </b><br><%=pet.getDescription()%>
 			<p>
-			<p>
-				Quantity : <input type="number" id="quantity"
-					max="<%=pet.getAvilableQty()%>" min="0" name="quantity" style="color: black;">
+			<p style="font-size: 27px;"><label>Quantity :</label>
+				<span><i class="fas fa-minus-square" onclick="decrease()"></i><input type="number" id="quantity"
+					max="<%=pet.getAvilableQty()%>" min="0" value="0" name="quantity">
+	         	<i class="fas fa-plus-square"  onclick="increase()"></i></span>
 			</p>
 			<p>
-				<button type="button" onclick="addToCart()">Add to Cart</button>
+				<button type="button" onclick="addToCart()"><i class="fas fa-cart-plus"></i> Cart</button>
 				<button type="button" onclick="buyNow()">Buy Now</button>
 			</p>
 			<p name="message" id="message">
@@ -280,20 +298,18 @@ table td p{
         	alert("invalid qty");
         }
     } 
-    
-    function getInfo(){  
-    	if(request.readyState==4){  
-    	var val=request.responseText;
-    	   alert(val) ;
-    	}  
-    	}  
-    
-    
+     
     // buy Now
     function buyNow(){  
     	var address='<%=customerDetails.getAddress()%>';
 					if (address == 'none') {
-						alert("Please add address before buy");
+						var confirmAction = confirm("Please add address before buy");
+						if (confirmAction) {
+							  window.location = 'myprofile.jsp';
+						}
+						else{
+							
+						}
 					} 
 					else {
 						var confirmAction = confirm("Are you sure you want buy this item");
@@ -311,7 +327,7 @@ table td p{
 											"Microsoft.XMLHTTP");
 								}
 								try {
-									request.onreadystatechange = getInfoBuy;
+									request.onreadystatechange = getInfo;
 									request.open("GET", url, true);
 									request.send();
 								} catch (e) {
@@ -328,10 +344,29 @@ table td p{
 					}
 				}
     }
-				function getInfoBuy() {
-					if (request.readyState == 4) {
-						var val = request.responseText;
-						alert(val);
+    
+    function getInfo(){  
+    	if(request.readyState==4){  
+    	var val=request.response;
+    	   alert(val.trim()) ;
+    	   if(val.includes("Low wallet balance")){
+				  window.location = 'myprofile.jsp';
+			}
+    	}  
+    	}	
+				
+				function increase(){
+					var value= document.getElementById("quantity").value;
+					if(value<<%=pet.getAvilableQty()%>){
+						value++;
+						document.getElementById("quantity").value=value;
+					}
+				}
+               function  decrease(){
+            	   var value= document.getElementById("quantity").value;
+            	   if(value>0){
+						value--;
+						document.getElementById("quantity").value=value;
 					}
 				}
 			</script>

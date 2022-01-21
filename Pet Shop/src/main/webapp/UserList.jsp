@@ -82,9 +82,10 @@ table {
 	top: 90px;
 	margin: 40px;
 	font-size: 20px;
+	text-align: left;
 }
 table tr,th{
-padding: 10px;
+padding: 20px;
 }
 </style>
 </head>
@@ -114,8 +115,8 @@ padding: 10px;
 
 			<tr>
 				<th>Id</th>
-				<th>First Name</th>
-				<th>Last Name</th>
+				<th>FirstName</th>
+				<th>LastName</th>
 				<th>Gender</th>
 				<th>User Name</th>
 				<th>Email</th>
@@ -128,8 +129,8 @@ padding: 10px;
 			%>
 			<tr>
 				<td class="text-capitalize"><%=customer.getCustomerId()%></td>
-				<td class="text-capitalize"><%=customer.getFirstName()%></td>
-				<td class="text-capitalize"><%=customer.getLastName()%></td>
+				<td class="text-capitalize" ><%=customer.getFirstName()%></td>
+				<td class="text-capitalize" ><%=customer.getLastName()%></td>
 				<td class="text-capitalize"><%=customer.getGender() %></td>
 				<td><%=customer.getUserName()%></td>
 				<td><%=customer.getEmail()%></td>

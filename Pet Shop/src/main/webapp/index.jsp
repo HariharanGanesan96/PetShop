@@ -5,8 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://kit.fontawesome.com/aeca6704b2.js" crossorigin="anonymous"></script>
+
 <style type="text/css">
 
 *{
@@ -37,6 +39,7 @@ h1{
     background-color: rgb(209, 219, 209);
     box-shadow: 0 0 10px black;
 }
+
 form label,p,a,input{
 color: black;
 }
@@ -46,6 +49,7 @@ color: black;
     font-size: 25px;
     margin-top: -5px;
 }
+
 #message{
    position: absolute;
    top:18%;
@@ -54,7 +58,8 @@ color: black;
    font-weight:bold;
    display: none;  
 }
- form input{
+
+form input{
          height: 30px;
          width: 250px;
          background: transparent;
@@ -63,7 +68,8 @@ color: black;
          border-right: none;
          border-bottom: 1px solid rgb(160, 155, 155);         
  }
- form input:focus{
+
+form input:focus{
     outline: none;
     }
  form button{
@@ -85,7 +91,7 @@ color: black;
 	background-size: cover;
 	background-attachment: fixed;
 	color: white;
-
+}
 </style>
 </head>
 <body>
@@ -96,11 +102,11 @@ color: black;
 		<p id="message">Invalid Username or password</p>
 		<form action="login" class="form" method="get">
 			<p id="head">Login</p>
-			<label for="username" id="username">Username:</label> <br> <input
+			<label for="username" id="username"><i class="fas fa-id-card" style="color: black;"></i> Username:</label> <br> <input
 				type="text" name="usernameinput" id="usernameinput"
 				placeholder="Enter the username" pattern="[a-zA-Z0-9]+{8,20}"
 				title="username must be in 8 character" required> <br>
-			<label for="password">Password:</label> <br> <input
+			<label for="password"><i class="fas fa-lock" style="color: black;"></i> Password:</label> <br> <input
 				type="password" name="passwordinput" id="passwordinput"
 				placeholder="Enter the password"
 				pattern="[a-zA-Z0-9!@#$%^&*()]+{8,20}"
@@ -118,12 +124,29 @@ color: black;
           </script>	
           
 	<% session.setAttribute("message","none"); }} %>
-	<%if(session.getAttribute("Register")!=null){
-		%>
+	
+	
+		<%if(session.getAttribute("register")!=null || session.getAttribute("register").equals("none")){
+		   if(session.getAttribute("register").equals("none")){
+			   
+		   }else
+			
+			{%>
           <script type="text/javascript">
-          alert("register completed you can login now");
+          alret('Register completed you can login now');
           </script>	
           
-	<% session.setAttribute("Register","none"); } %>
+	<% session.setAttribute("message","none"); }} %>
+
+	<script type="text/javascript">
+	  function showPassword() {
+		  var show = document.getElementById("password");
+		  if (show.type === "password") {
+		    show.type = "text";
+		  } else {
+		    show.type = "password";
+		  }
+		}
+	  </script>
 </body>
 </html>

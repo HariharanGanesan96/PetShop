@@ -48,12 +48,10 @@ public class Register extends HttpServlet {
 			int i = pstmt.executeUpdate();
 			HttpSession session =req.getSession();
 			if(i>0) {
-			session.setAttribute("Register", "updated");
 			res.sendRedirect("index.jsp");
 			}
 			else {
-				session.setAttribute("Register", "Not updated");
-				res.sendRedirect("Register.jsp");	
+				res.sendRedirect("Register.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

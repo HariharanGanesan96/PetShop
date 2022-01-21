@@ -27,7 +27,7 @@
    
    Customers petCustomerDetails=customerDao.customerDetails(pet.getCustomer().getCustomerId());
  
-   if(customerDetails.getWallet()>(quantity*pet.getPetprice())){  
+   if(customerDetails.getWallet()>=(quantity*pet.getPetprice())){  
 	   if(pet.getAvilableQty()>=quantity){	   
    orders.getCustomer().setCustomerId(customerDetails.getCustomerId());
    orders.setTotalprice((quantity*pet.getPetprice()));
@@ -73,7 +73,7 @@
    		}
    		catch(LowWalletBalance e){	
    			write.print(e+
-   					"\n Your wallet Balance"+customerDetails.getWallet()+
+   					"\n Low wallet balance"+customerDetails.getWallet()+
    					"\n Product Amount"+(quantity*pet.getPetprice()));
    		}
 	 

@@ -11,7 +11,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>My Orders</title>
-<link rel="stylesheet" href="MyOrders.css">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://kit.fontawesome.com/aeca6704b2.js"

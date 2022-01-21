@@ -103,6 +103,10 @@ table img {
 	border-color: black;
 	border-radius: 10px;
 }
+input {
+  border-radius: 5px;
+  border: none;
+  }
 #update {
 	width: 130px;
 	height: 30px;
@@ -175,17 +179,38 @@ table img {
 	margin-left: 40px;
 }
 
-
-pre{
-margin-left:20px;
-font-family: sans-serif;
-font-weight: bold;
-font-size: x-large;
-display: inline;
-	
+table select {
+	width: 215px;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	color: black;
+	padding-left: 10px;
+	outline: none;
 }
 
+table select option {
+	color: black;
+	padding-left: 10px;
+}
 
+pre {
+	margin-left: 20px;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: x-large;
+	display: inline;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+	-moz-appearance: textfield;
+}
 </style>
 </head>
 <body>
@@ -203,8 +228,8 @@ display: inline;
 			<li><a href="myprofile.jsp">My Profile</a></li>
 			<li><a href="mycart.jsp">My cart</a></li>
 			<li><a href="myorders.jsp">My orders</a></li>
-			<li><a href="MyPets.jsp">My pets</a></li>
 			<li><a href="AddItem.jsp">Add item</a></li>
+			<li><a href="MyPets.jsp">My pets</a></li>
 			<li><a href="home.jsp">Home</a></li>
 		</ul>
 	</div>
@@ -217,30 +242,37 @@ display: inline;
 			<tr>
 				<td><img
 					src="./Profile Picture/<%=customerDetails.getImage()%>"
-					alt="user picture">
-					</td>
+					alt="user picture"></td>
 				<td style="width: 600px;">
-								<p><pre >First Name </pre>: <%=customerDetails.getFirstName()%> <%=customerDetails.getLastName()%> </p>
-								<p><pre >User Name </pre>: <%=customerDetails.getUserName()%></p>
-								<p><pre>Gender       </pre>: <%=customerDetails.getGender() %></p>
-								<p><pre>Email          </pre>: <%=customerDetails.getEmail()%></p>
-							    <p><pre>Mobile        </pre>: <%=customerDetails.getNumber()%></p>
-								<p><pre>Address     </pre>: <%=customerDetails.getAddress()%>, <%=customerDetails.getCity()%>
-								, <%=customerDetails.getPincode()%></p>
-								<p><pre>wallet         </pre>: Rs.<%=customerDetails.getWallet()%></p>
-		
+					<p>
+					<pre>First Name </pre>: <%=customerDetails.getFirstName()%> <%=customerDetails.getLastName()%>
+					</p>
+					<p>
+					<pre>User Name </pre>: <%=customerDetails.getUserName()%></p>
+					<p>
+					<pre>Gender       </pre>: <%=customerDetails.getGender()%></p>
+					<p>
+					<pre>Email          </pre>: <%=customerDetails.getEmail()%></p>
+					<p>
+					<pre>Mobile        </pre>: <%=customerDetails.getNumber()%></p>
+					<p>
+					<pre>Address     </pre>: <%=customerDetails.getAddress()%>, <%=customerDetails.getCity()%>
+					, <%=customerDetails.getPincode()%></p>
+					<p>
+					<pre>wallet         </pre>: Rs.<%=customerDetails.getWallet()%></p>
+
 				</td>
-				</tr>
-				<tr>
+			</tr>
+			<tr>
 				<td colspan="3">
-				     <p>
+					<p>
 						Update Image : <input type="file" id="image" name="image">
 						<button type="button" id="ok" onclick="UpdateImage()">OK</button>
 					</p>
 				</td>
-					</tr>
-						
-				
+			</tr>
+
+
 		</tbody>
 	</table>
 
@@ -248,7 +280,7 @@ display: inline;
 		<tbody>
 			<tr>
 				<td id="headings" colspan="4" style="font-size: 30px;">Update
-					Profile</td>
+					Profile <i class="fas fa-user-edit"></i></td>
 			</tr>
 			<tr>
 				<form action="UpdateProfile">
@@ -267,9 +299,12 @@ display: inline;
 					value="<%=customerDetails.getUserName()%>"
 					pattern="[a-zA-Z0-9]{8,20}" required></td>
 				<td><label for="gender">Gender</label></td>
-				<td><input type="text" name="gender"
-					value="<%=customerDetails.getGender()%>" pattern="[a-zA-Z]{4,15}"
-					required></td>
+				<td>
+				<select id="gender" name="gender">
+				<option value="Male">male</option>
+				<option value="Female">female</option>
+				<option value="Others">others</option>
+			</select></td>
 			</tr>
 			<tr>
 				<td><label for="email">Email</label></td>
@@ -285,10 +320,10 @@ display: inline;
 				<td><label for="password">Password</label></td>
 				<td><input type="password" name="password" id="password"
 					value="<%=customerDetails.getPassword()%>"
-					pattern="[a-zA-Z0-9!@#$%^&*()_+]{8,20}" required></td>
-				<td colspan="2" style="text-align: left;"><input
-					type="checkbox" onclick="showPassword()">Show Password</td>
-				<td></td>
+					pattern="[a-zA-Z0-9!@#$%^&*()_+]{8,20}" required></td>		
+				<td colspan="2"><input
+					type="checkbox" onclick="showPassword()" style="position: relative;left: -80px;top: 5px;"></td>
+				<td style="position: relative;left: -390px;top: 5px;">Show Password</td>
 			</tr>
 			<tr>
 				<td>
@@ -298,21 +333,33 @@ display: inline;
 			</tr>
 			<tr>
 				<td id="headings" colspan="4"
-					style="font-size: 30px; padding-top: 70px;">Update Address</td>
+					style="font-size: 30px; padding-top: 70px;">Update Address <i class="fas fa-user-edit"></i></td>
 			</tr>
 
 			<tr>
 				<form action="UpdateAddress.jsp">
 					<td><label for="address">Street</label></td>
+					<%if(customerDetails.getAddress().equals("none")) {%>
 					<td><input type="text" name="address" id="address"
-						value="<%=customerDetails.getAddress()%>" required></td>
+						placeholder="Enter the address" pattern="[a-zA-z,./0-9]{3,30}" required></td>			
+					<%}else{ %>
+					
+					<td><input type="text" name="address" id="address"
+						value="<%=customerDetails.getAddress()%>" pattern="[a-zA-z,./0-9]{3,30}" required></td>
+					<%} %>
 					<td><label for="city">City</label></td>
+						<%if(customerDetails.getCity().equals("none")) {%>
+										
 					<td><input type="text" name="city" id="city"
-						" value="<%=customerDetails.getCity()%>" required></td>
+						placeholder="Enter the city" pattern="[a-zA-Z]{3,30}" required></td>
+					<%}else{ %>							
+					<td><input type="text" name="city" id="city"
+						value="<%=customerDetails.getCity()%>" pattern="[a-zA-Z]{3,30}"  required></td>
+							<%} %>
 			</tr>
 			<tr>
 				<td><label for="pincode">Pincode</label></td>
-				<td><input type="text" name="pincode" id="pincode"
+				<td><input type="text" name="pincode" id="pincode" pattern="[6]{1}[0-9]{5}"
 					value="<%=customerDetails.getPincode()%>" required>
 				<td></td>
 				<td></td>
@@ -324,12 +371,11 @@ display: inline;
 
 			<tr>
 				<td id="headings" colspan="4"
-					style="font-size: 30px; padding-top: 70px;">Update Wallet</td>
+					style="font-size: 30px; padding-top: 70px;">Update Wallet <i class="fas fa-wallet"></i></td>
 			</tr>
 			<tr>
-
 				<td><label for="wallet">Add Amount</label></td>
-				<td><input type="text" name="wallet" id="updatewallet1" min="0"
+				<td><input type="number" name="wallet" id="updatewallet1" min="0"
 					value="0" required></td>
 				<td><button id="updatewallet" onclick="UpdateWallet()"
 						type="button">Add</button></td>
@@ -360,9 +406,7 @@ display: inline;
 	
   function UpdateWallet(){
 	  var wallet=document.getElementById("updatewallet1").value;
-	  console.log(wallet);
   	var url="UpdateWallet.jsp?wallet="+wallet;  
-    console.log("called");
   	if(window.XMLHttpRequest){  
   		request=new XMLHttpRequest();  
   		}  
@@ -385,9 +429,7 @@ display: inline;
 	  var image=document.getElementById("image").value;
 	  console.log(image);
 	  const name = image.substring(12, image.length);
-//	  console.log(myArray);
   	var url="UpdateImage.jsp?image="+name;  
-    console.log("called");
   	if(window.XMLHttpRequest){  
   		request=new XMLHttpRequest();  
   		}  
@@ -396,7 +438,7 @@ display: inline;
   		}  
   	try  
   	{  
-  	request.onreadystatechange=getInfoImage;  
+  	request.onreadystatechange=getInfo;  
   	request.open("GET",url,true);  
   	request.send();  
   	}  
@@ -409,19 +451,11 @@ display: inline;
   function getInfo(){  
   	if(request.readyState==4){  
   	var val=request.responseText;
-  	console.log(val);
-  	   alert(""+val); 
+  	   alert(val.trim()); 
   	  location.reload();
   	}  
   	}  
-  function getInfoImage(){  
-	  	if(request.readyState==4){  
-	  	var val=request.responseText;
-	  	console.log(val);
-	  	   alert(""+val); 
-	  	 location.reload();
-	  	}  
-	  	}  
+
  
   function showPassword() {
 	  var show = document.getElementById("password");

@@ -74,8 +74,9 @@ h1{
 .petlist{
     margin-top: 40px;
     padding-top:20px;
-    margin-left: 50px;
+    margin-left: 30px;
     transition: 0.5s;
+    width: 350px;
 }
  h2:hover{
     color: tomato;
@@ -88,7 +89,7 @@ h1{
    
 }
 #pets {
-    margin-left: 45px;
+    margin-left: 25px;
     margin-top: 20px;
     line-height: 2;
     font-size: 18px;
