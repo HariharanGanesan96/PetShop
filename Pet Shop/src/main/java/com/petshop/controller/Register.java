@@ -46,15 +46,17 @@ public class Register extends HttpServlet {
 			pstmt.setLong(6, mobileNumber);
 			pstmt.setString(7, gender);
 			int i = pstmt.executeUpdate();
-			HttpSession session =req.getSession();
+			HttpSession session=req.getSession();
 			if(i>0) {
-			res.sendRedirect("index.jsp");
+	            out.print("	<script type=\"text/javascript\">alert('registration completed successfully login now');"
+	            		+ "window.location = 'index.jsp';</script>");
 			}
 			else {
-				res.sendRedirect("Register.jsp");
+				 out.print("	<script type=\"text/javascript\">alert('Something went to wrong try again');"
+		            		+ "window.location = 'Register.jsp';</script>");
+
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 }

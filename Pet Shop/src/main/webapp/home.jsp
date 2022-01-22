@@ -17,14 +17,14 @@
 <script src="https://kit.fontawesome.com/aeca6704b2.js"
 	crossorigin="anonymous"></script>
 <style type="text/css">
-@charset "ISO-8859-1";
-
+/* Margin styles */
 * {
 	margin: 0;
 	padding: 0;
 	color: white;
 }
 
+/* Background styles */
 body {
 	background-image: linear-gradient(rgba(0, 0, 0, .5) 50%,
 		rgb(0, 0, 0, .5) 50%), url("./Images/background.jpg");
@@ -34,6 +34,7 @@ body {
 	text-transform: capitalize;
 }
 
+/* Navigation styles */
 .navigation {
 	padding-top: 15px;
 	font-family: sans-serif;
@@ -108,6 +109,8 @@ h1 {
 	color: black;
 }
 
+
+/* Pet List styles */
 .petlist {
 	margin-top: 40px;
 	padding-top: 20px;
@@ -173,25 +176,30 @@ input:focus {
 </head>
 <body>
 
-	<%
-	
-
+	<%  PetDAO petdao = new PetDAO();
+		PetDetails pet = new PetDetails();
 		List<PetDetails> petList = new ArrayList<PetDetails>();
 		Customers customerDetails = (Customers) session.getAttribute("customer");
-		PetDetails pet = new PetDetails();
-		PetDAO petdao = new PetDAO();
 		petList = petdao.showAllpetsDetails(customerDetails);
 	%>
 
+<!-- Navigation bar -->
+
 	<div class="navigation">
+	
+	<!-- Web site name and logo -->
 		<h1>
 			<i class="fas fa-paw" style="color: white;"></i> Pet Shop
 		</h1>
+		
+	<!-- Search bar -->
 		<form action="Search.jsp">
 			<input type="search" name="search" id="searchinput"
 				placeholder="Enter pet category or name">
 			<button type="submit" id="search">search</button>
 		</form>
+		
+	<!-- Menu bar -->
 		<ul id="menu">
 			<li><a href="myprofile.jsp">My Profile</a></li>
 			<li><a href="mycart.jsp">My cart</a></li>
@@ -201,6 +209,9 @@ input:focus {
 			<li><a href="home.jsp">Home</a></li>
 		</ul>
 	</div>
+	
+<!-- Pet list -->
+
 	<div class="content">
 		<h2 class="petlist">Pet Lists</h2>
 		<table>
@@ -213,9 +224,12 @@ input:focus {
 					<td>
 						<table id="pets">
 							<tbody>
+							<!-- Pet Image -->
 								<tr>
 									<td><img src="./Pets/<%=petDetails.getPetImage()%>"
 										alt="petimage"></td>
+										
+						   <!-- Pet description -->
 									<td id="petdetails">
 										<p>Pet Type</p>
 										<p>Pet Name</p>
@@ -224,6 +238,8 @@ input:focus {
 										<p>Available</p>
 										<p style="visibility: hidden;">empty</p>
 									</td>
+									
+                           <!-- Pet description data -->
 									<td>
 										<p>
 											:
@@ -250,8 +266,6 @@ input:focus {
 								</tr>
 							</tbody>
 						</table>
-
-
 					</td>
 					<%
 					count++;
@@ -264,7 +278,6 @@ input:focus {
 					}
 					}
 					%>
-
 				</tr>
 			</tbody>
 		</table>

@@ -16,21 +16,25 @@
 <script src="https://kit.fontawesome.com/aeca6704b2.js"
 	crossorigin="anonymous"></script>
 <style type="text/css">
+
+/* Page Margin styles */
 * {
 	margin: 0;
 	padding: 0;
 	color: white;
 }
 
+/* Page background styles */
 body {
 	background-image: linear-gradient(rgba(0, 0, 0, .5) 50%,
 		rgb(0, 0, 0, .5) 50%), url("./Images/background.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
-    text-transform: capitalize;
+	text-transform: capitalize;
 }
 
+/* Navigation bar styles */
 .navigation {
 	padding-top: 15px;
 	font-family: sans-serif;
@@ -105,6 +109,9 @@ h1 {
 	color: black;
 }
 
+
+
+/* Pet register form styles */
 .animalform {
 	position: absolute;
 	left: 20%;
@@ -118,7 +125,7 @@ table {
 	border-radius: 5px;
 	padding-left: 20px;
 	background-color: rgba(194, 204, 198, 0.959);
-	font-size:20px;
+	font-size: 20px;
 	width: 850px;
 	height: 450px;
 }
@@ -188,31 +195,34 @@ textarea {
 	padding-top: 20px;
 	color: black;
 }
-
 </style>
 </head>
-
 <body>
+<!-- Header -->
+<header>
 	<div class="navigation">
+	<!-- Web site name and logo -->
 		<h1>
 			<i class="fas fa-paw" style="color: white;"></i> Pet Shop
 		</h1>
+	<!-- Navigation menus -->
+		<nav>
 		<ul id="menu">
 			<li><a href="myprofile.jsp">My Profile</a></li>
 			<li><a href="mycart.jsp">My cart</a></li>
 			<li><a href="myorders.jsp">My orders</a></li>
-		    <li><a href="AddItem.jsp">Add item</a></li>
+			<li><a href="AddItem.jsp">Add item</a></li>
 			<li><a href="MyPets.jsp">My pets</a></li>
 			<li><a href="home.jsp">Home</a></li>
 		</ul>
+		</nav>
 	</div>
-
-	<div>
-
+</header>
 		<%
 		Customers customerDetails = (Customers) session.getAttribute("customer");
 		if (!customerDetails.getAddress().equals("none")) {
 		%>
+	<!-- Add pet from -->
 		<form class="animalform" action="AnimalForm.jsp">
 			<table>
 				<tr>
@@ -267,6 +277,8 @@ textarea {
 					</tr>
 				</tbody>
 			</table>
+			
+	<!-- Add pet from data list -->
 			<datalist id="typelist">
 				<option value="Dog"></option>
 				<option value="Cat"></option>
@@ -300,13 +312,15 @@ textarea {
 		%>
 		<script type="text/javascript">
 			alert("before Add animls please add address details");
-			  window.location = 'myprofile.jsp';
+			window.location = 'myprofile.jsp';
 		</script>
 		<%
 		}
 		%>
-	</div>
+	
 	<script>
+	
+<!--To set min and max attribute for date -->
 		today();
 		function today() {
 			var today = new Date();

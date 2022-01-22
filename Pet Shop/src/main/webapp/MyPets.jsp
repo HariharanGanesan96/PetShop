@@ -14,12 +14,15 @@
 <script src="https://kit.fontawesome.com/aeca6704b2.js"
 	crossorigin="anonymous"></script>
 <style type="text/css">
+
+/*Page margin setup */
 * {
 	margin: 0;
 	padding: 0;
 	color: white;
 }
 
+/*Background styles */
 body {
 	background-image: linear-gradient(rgba(0, 0, 0, .4) 50%,
 		rgb(0, 0, 0, .4) 50%), url("./Images/background6.jpg");
@@ -32,6 +35,7 @@ body {
 	color: white;
 }
 
+/* Navigation styles */
 .navigation {
 	padding-top: 15px;
 	font-family: sans-serif;
@@ -71,6 +75,8 @@ h1 {
 	color: black;
 }
 
+
+/* My pet list styles */
 #content {
 	margin-top: 40px;
 }
@@ -137,13 +143,18 @@ h2:hover {
 	color: black;
 }
 </style>
+
 </head>
 <body>
-
+<!-- Header -->
+<header>
 	<div class="navigation">
+	<!-- Logo -->
 		<h1>
 			<i class="fas fa-paw" style="color: white;"></i> Pet Shop
 		</h1>
+	<!-- Navigation -->
+		<nav>
 		<ul id="menu">
 			<li><a href="myprofile.jsp">My Profile</a></li>
 			<li><a href="mycart.jsp">My cart</a></li>
@@ -152,8 +163,10 @@ h2:hover {
 			<li><a href="MyPets.jsp">My pets</a></li>
 			<li><a href="home.jsp">Home</a></li>
 		</ul>
+		</nav>
 	</div>
-
+</header>
+	
 	<%
 	List<PetDetails> petList = new ArrayList<PetDetails>();
 	Customers customerDetails = (Customers) session.getAttribute("customer");
@@ -162,8 +175,9 @@ h2:hover {
 	petList = petdao.showMypetdetails(customerDetails.getCustomerId());
 	int soldQty = 0;
 	%>
+	
+<!-- My pet list -->
 	<div id="content">
-
 		<h2>My Pet List</h2>
 		<table>
 			<tbody>
@@ -176,8 +190,10 @@ h2:hover {
 						<table id="pets">
 							<tbody>
 								<tr>
+								<!-- Pet image  -->
 									<td><img src="./Pets/<%=petDetails.getPetImage()%>"
 										alt="petimage"></td>
+								<!-- Pet description -->
 									<td class="petdetails">
 										<p>Name</p>
 										<p>Color</p>
@@ -185,59 +201,32 @@ h2:hover {
 										<p>Total Qty</p>
 										<p>Sold Qty</p>
 										<p>Aavilable Qty</p>
-										<p>Status</p> <%
- if (petDetails.getStatus().equals("Not approved")) {
- %>
-										<p>
-											<a href="EditPet.jsp?petid=<%=petDetails.getPetId()%>"><button
-													type="button">Edit</button></a>
-										</p> <%
- }
- %>
+										<p>Status</p> 
+                                      <%   if (petDetails.getStatus().equals("Not approved")) {%>
+                                                                                           
+										<p><a href="EditPet.jsp?petid=<%=petDetails.getPetId()%>"><button
+													type="button">Edit</button></a></p> 
+													
+													<% } %>
 									</td>
-
+                       <!-- Pet description data -->
 									<td class="petdetails">
-										<p>
-											:
-											<%=petDetails.getPetName()%>
+										<p> : <%=petDetails.getPetName()%></p>
+										<p>	: <%=petDetails.getPetColor()%>	</p>
+										<p>	: Rs.<%=petDetails.getPetprice()%></p>
+										<p>	: <%=petDetails.getPetQty()%></p> 
+						<% soldQty = petDetails.getPetQty() - petDetails.getAvilableQty(); %>
+										<p>	: <%=soldQty%></p>
+										<p>	: <%=petDetails.getAvilableQty()%></p>
+										<p>	: <%=petDetails.getStatus()%></p> 
+						<% if (petDetails.getStatus().equals("Not approved")) { %>
+										<p>	<a href=""><button type="button" onclick="deletePet('<%=petDetails.getPetId()%>')">Delete</button></a>
 										</p>
-										<p>
-											:
-											<%=petDetails.getPetColor()%>
-										</p>
-										<p>
-											: Rs.<%=petDetails.getPetprice()%>
-										</p>
-										<p>
-											:
-											<%=petDetails.getPetQty()%>
-										</p> <%
- soldQty = petDetails.getPetQty() - petDetails.getAvilableQty();
- %>
-										<p>
-											:
-											<%=soldQty%>
-										</p>
-										<p>
-											:
-											<%=petDetails.getAvilableQty()%></p>
-										<p>
-											:
-											<%=petDetails.getStatus()%></p> <%
- if (petDetails.getStatus().equals("Not approved")) {
- %>
-										<p>
-											<a href=""><button type="button"
-													onclick="deletePet('<%=petDetails.getPetId()%>')">Delete</button></a>
-										</p> <%
- }
- %>
+										 <% } %>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-
-
 					</td>
 					<%
 					count++;
@@ -256,14 +245,14 @@ h2:hover {
 		</table>
 	</div>
 	<script type="text/javascript">
+	
+<!--Delete my pet ajax -->
+
 		function deletePet(petId) {
 			var confirmAction = confirm("Are you sure you want delete this item");
 			if (confirmAction) {
-
 				console.log("called buy");
-				console.log(petId);
 				var url = "DeletePet.jsp?petId=" + petId;
-				console.log(url);
 				if (window.XMLHttpRequest) {
 					request = new XMLHttpRequest();
 				} else if (window.ActiveXObject) {
@@ -280,6 +269,8 @@ h2:hover {
 				alert("Action canceled");
 			}
 		}
+				
+<!--Delete my pet ajax response -->
 		function getInfo() {
 			if (request.readyState == 4) {
 				var val = request.responseText;
@@ -289,7 +280,5 @@ h2:hover {
 			}
 		}
 	</script>
-
-
 </body>
 </html>

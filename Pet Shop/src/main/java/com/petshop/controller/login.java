@@ -3,6 +3,7 @@ package com.petshop.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,8 +65,11 @@ public class login extends HttpServlet{
 					}	
 			}				
 }		else {
-	            session.setAttribute("message", "visible");
-	            resp.sendRedirect("index.jsp");
+	            session.setAttribute("message", "Invalid username or password");
+	            out.print("	<script type=\"text/javascript\">alert('invalid username or password');"
+	            		+ "window.location = 'index.jsp';</script>");
+	          
+	          //  resp.sendRedirect("index.jsp");
 }
 
     }

@@ -11,16 +11,31 @@
 
 <style type="text/css">
 
-*{
+/* Margin settings */
+  *{
     margin: 0;
     padding: 0;
     color:white;
 }
+
+/* Background and body */
+ body{
+    background:linear-gradient(rgba(0,0,0,.3)50%,rgb(0,0,0,.3)50%),url("./Images/background7.jpg");
+    background-repeat: no-repeat;
+	background-position:center;
+	background-size: cover;
+	background-attachment: fixed;
+	color: white;
+}
+
+/* Logo */
 h1{
     font-family: sans-serif;
     padding-top: 10px;
     padding-left: 10px;
 }
+
+/* form field */
 .form{
     color: black;
     position: absolute;
@@ -40,6 +55,7 @@ h1{
     box-shadow: 0 0 10px black;
 }
 
+
 form label,p,a,input{
 color: black;
 }
@@ -56,7 +72,8 @@ color: black;
    left:73%;
    font-size: 20px;
    font-weight:bold;
-   display: none;  
+   display:none;
+   text-align: center; 
 }
 
 form input{
@@ -72,6 +89,7 @@ form input{
 form input:focus{
     outline: none;
     }
+    
  form button{
      height: 30px;
      width: 130px;
@@ -84,69 +102,58 @@ form input:focus{
      font-size: 15px;
 
  }
- body{
-    background:linear-gradient(rgba(0,0,0,.3)50%,rgb(0,0,0,.3)50%),url("./Images/background7.jpg");
-    background-repeat: no-repeat;
-	background-position:center;
-	background-size: cover;
-	background-attachment: fixed;
-	color: white;
-}
+
 </style>
 </head>
 <body>
 	<div id="background">
-		<!--Welcome note-->
+	
+		<!-- Web site Name and Logo-->
+		
 		<h1><i class="fas fa-paw" style="color: white;"></i> Pet Shop</h1>
+		
 		<!--Login form-->
-		<p id="message">Invalid Username or password</p>
+		
+		<!--Message field-->
+		 
+	 
+        
+        <p id="message"></p>
+          
+		
 		<form action="login" class="form" method="get">
-			<p id="head">Login</p>
+		
+		<p id="head">Login</p>
+			
+  <!--UserName And Password-->
 			<label for="username" id="username"><i class="fas fa-id-card" style="color: black;"></i> Username:</label> <br> <input
 				type="text" name="usernameinput" id="usernameinput"
 				placeholder="Enter the username" pattern="[a-zA-Z0-9]+{8,20}"
 				title="username must be in 8 character" required> <br>
+			
 			<label for="password"><i class="fas fa-lock" style="color: black;"></i> Password:</label> <br> <input
 				type="password" name="passwordinput" id="passwordinput"
 				placeholder="Enter the password"
 				pattern="[a-zA-Z0-9!@#$%^&*()]+{8,20}"
 				title="password must be in 8 character" required> <br>
+			
+   <!--Login Button-->
 			<button type="submit" id="login">Login</button>
 			<p>
 				Don't have account ?<a href="Register.jsp"> Register here</a>
 			</p>
 		</form>
 	</div>
+	
+  <!--validation response for username password-->
+  
 	<%if(session.getAttribute("message")!=null){
-		if(session.getAttribute("message").equals("visible")){%>
+%>
           <script type="text/javascript">
-          document.getElementById("message").style.display = "block";
-          </script>	
-          
-	<% session.setAttribute("message","none"); }} %>
-	
-	
-		<%if(session.getAttribute("register")!=null || session.getAttribute("register").equals("none")){
-		   if(session.getAttribute("register").equals("none")){
-			   
-		   }else
-			
-			{%>
-          <script type="text/javascript">
-          alret('Register completed you can login now');
-          </script>	
-          
-	<% session.setAttribute("message","none"); }} %>
-
-	<script type="text/javascript">
-	  function showPassword() {
-		  var show = document.getElementById("password");
-		  if (show.type === "password") {
-		    show.type = "text";
-		  } else {
-		    show.type = "password";
-		  }
-		}
-	  </script>
+          document.getElementById("message").style.display="block";
+          document.getElementById("message").innerHTML="Invalid Username or password";
+          </script>	  
+	<%} %>
+	 
 </body>
 </html>

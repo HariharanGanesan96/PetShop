@@ -7,7 +7,6 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,12 +17,15 @@
 <script src="https://kit.fontawesome.com/aeca6704b2.js"
 	crossorigin="anonymous"></script>
 <style type="text/css">
+
+/* Page marging sttings*/
 * {
 	margin: 0;
 	padding: 0;
 	color: white;
 }
 
+/* Background style */
 body {
 	background-image: linear-gradient(rgba(0, 0, 0, .5) 50%,
 		rgb(0, 0, 0, .5) 50%), url("./Images/background.jpg");
@@ -33,6 +35,7 @@ body {
 	text-transform: capitalize;
 }
 
+/* Navigation style */
 .navigation {
 	padding-top: 15px;
 	font-family: sans-serif;
@@ -66,6 +69,8 @@ h1 {
 	color: black;
 }
 
+
+/* Edit pet  style */
 .animalform {
 	position: absolute;
 	left: 20%;

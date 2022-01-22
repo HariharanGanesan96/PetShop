@@ -12,18 +12,23 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://kit.fontawesome.com/aeca6704b2.js"
 	crossorigin="anonymous"></script>
+
 <style type="text/css">
+
+/* Margin setting */
 * {
 	margin: 0;
 	padding: 0;
 }
 
+/* Back ground setting */
 #background {
 	background: linear-gradient(#e66465, #9198e5);
 	height: 100vh;
 	background-color: rgb(207, 202, 193);
 }
 
+/* Register form setting */
 .registerform {
 	width: 800px;
 	height: 520px;
@@ -47,6 +52,7 @@ h1 {
 	font-size: 25px;
 }
 
+/* Register form table setting */
 table {
 	padding-top: 20px;
 	font-size: 20px;
@@ -149,11 +155,15 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 input[type=number] {
 	-moz-appearance: textfield;
 }
+
 </style>
 </head>
 <body>
-	<!--register-->
+
 	<div id="background">
+	
+<!-- Web site Name and Logo-->
+		
 		<h1>
 			<i class="fas fa-paw" style="color: white;"></i> Pet Shop
 		</h1>
@@ -164,6 +174,8 @@ input[type=number] {
 					src="https://images.pexels.com/photos/8473666/pexels-photo-8473666.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
 					alt="back">
 			</div>
+	
+<!--register Table-->	
 			<table>
 				<thead>
 					<tr>
@@ -231,14 +243,12 @@ input[type=number] {
 					</tr>
 				</thead>
 			</table>
-			<select id="genderlist">
-				<option value="Male" selected="selected"></option>
-				<option value="Female"></option>
-				<option value="Others"></option>
-			</select>
 		</form>
 	</div>
+		
 	<script>
+	
+<!--Password and Confirm password Matching-->	
 		function validatePassword() {
 			let password = document.getElementById("passwordinput").value;
 			let repassword = document.getElementById("repasswordinput").value;
@@ -256,6 +266,10 @@ input[type=number] {
 				document.getElementById("register").disabled = true;
 			}
 		}
+		
+
+<!--Validation Of Username using Ajax -->	
+
 		function validateUsername() {
 			let userName = document.getElementById("usernameinput").value;
 			if (userName.length > 7) {
@@ -277,7 +291,10 @@ input[type=number] {
 			}
 		}
 
-		function validateEmail() {
+
+<!--Validation of email Ajax -->			
+
+  		function validateEmail() {
 			let email = document.getElementById("emailinput").value;
 			var url = "ValidateEmail.jsp?email=" + email;
 			if (window.XMLHttpRequest) {
@@ -294,6 +311,9 @@ input[type=number] {
 			}
 
 		}
+  		
+ <!--Ajax Respose For Username validation-->
+ 
 		function getInfoBuyUsername() {
 			if (request.readyState == 4) {
 				var val = request.responseText;
@@ -304,6 +324,9 @@ input[type=number] {
 				}
 			}
 		}
+		
+
+<!--Ajax Respose For Email Validation-->
 
 		function getInfoBuyEmail() {
 			if (request.readyState == 4) {
@@ -315,6 +338,7 @@ input[type=number] {
 				}
 			}
 		}
+
 	</script>
 </body>
 </html>
